@@ -1,6 +1,6 @@
 ---
 name: notebook-standards
-description: The rules every exploratory data analysis (EDA) Jupyter notebook follows - section structure, the explanation that comes before each test, cells that show results as charts and labelled tables instead of prose print statements, column naming, simple code, comments, and a notebook that runs top to bottom. Use this skill whenever you create, edit, or review a Jupyter notebook for data analysis, or when another EDA skill writes cells into one, even if the request only says "add a cell" or "clean up this notebook".
+description: Keeps analysis notebooks clear, reproducible, and easy to follow. Use whenever creating, editing, or reviewing a Jupyter notebook for data analysis.
 ---
 
 # Notebook standards

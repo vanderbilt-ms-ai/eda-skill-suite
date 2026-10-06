@@ -1,6 +1,6 @@
 ---
 name: writing-standards
-description: The rules for every sentence an analysis produces - notebook markdown, findings, figure titles, memos, and reports - plain direct statements, no aphorisms or catchy phrasing (the reversal, the rule of three, slogans), no variable names in prose, the observation stated before the question, findings in describe-interpret-conclude form with the number that decides them, words that match what the data shows, and plain ASCII. Use this skill whenever you write or review prose for a data analysis, including a "What we found" cell, a memo to a stakeholder, a figure title, or a summary, even a single sentence.
+description: Keeps writing about data plain, precise, and supported by the numbers. Use whenever writing or reviewing findings, memos, figure titles, or summaries.
 ---
 
 # Writing standards

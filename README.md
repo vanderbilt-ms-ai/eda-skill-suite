@@ -26,22 +26,22 @@ and Wickham's tidy data.
 
 Workflow skills, one per stage:
 
-| Skill | Stage |
+| Skill | What it does |
 |---|---|
-| `eda-workflow` | Runs the whole process; says which skill handles each stage and what the analyst decides |
-| `eda-notebook-setup` | Problem to brief, questions, and hypotheses; find, size, and pull the data; first look; provenance |
-| `eda-data-quality` | What a row is, missing values, values and units, coverage, preprocessing; every check reported |
-| `eda-analysis-selection` | From a hypothesis as worded to the analysis and figure that test it; the verdict; the next question |
-| `eda-lens` | Regression, clustering, and classification used mid-investigation to find what to ask next |
-| `eda-verify` | Re-run, lint, trace and re-derive numbers, check the wording, look at every figure |
+| `eda-workflow` | Runs the whole investigation and calls the other skills at each stage |
+| `eda-notebook-setup` | Turns the problem into questions and hypotheses; pulls, checks, and documents the data |
+| `eda-data-quality` | Checks data quality, including missing values, and records each decision |
+| `eda-analysis-selection` | Chooses the analysis and figure that test each hypothesis; states the verdict and the next question |
+| `eda-lens` | Uses regression, clustering, and classification to find what to investigate next |
+| `eda-verify` | Re-runs the analysis and confirms every number, word, and figure matches the data |
 
 Standards skills, applied to every cell:
 
-| Skill | Covers |
+| Skill | What it does |
 |---|---|
-| `notebook-standards` | Section structure, explanation before each test, results as charts and labelled tables, naming, simple code, size; `scripts/nb_lint.py` checks what it can |
-| `figure-standards` | Plot type, titles, labels, ticks, reference lines, integrity, color, the five-step figure description |
-| `writing-standards` | Plain statements without aphorisms or slogans, observation before question, describe-interpret-conclude, words that match the data, plain ASCII |
+| `notebook-standards` | Keeps notebooks clear, reproducible, and easy to follow; `scripts/nb_lint.py` checks what it can |
+| `figure-standards` | Creates figures that follow best practices for communicating insights visually |
+| `writing-standards` | Keeps writing about data plain, precise, and supported by the numbers |
 
 ## Installing
 

@@ -1,6 +1,6 @@
 ---
 name: eda-lens
-description: Use regression, clustering, or classification as a lens in the middle of an exploratory analysis - fit and validate the model, then report what it surfaces (the largest residuals and what they share, each cluster's profile and how it lines up with known labels, the cases a classifier misses) and turn that into the next questions to investigate. Covers preparation (scaling, encoding, train/test split before anything else), choosing k deliberately, baselines, confusion matrices, and the overfitting check. Use this skill whenever an analysis calls for a regression, clustering, k-means, classification, logistic regression, or k-nearest neighbors, or whenever someone asks what kinds of cases there are, who beats a prediction, or whether something could have been predicted.
+description: Uses regression, clustering, and classification in the middle of an analysis to find what to investigate next. Use whenever an analysis calls for a model.
 ---
 
 # Models as lenses
