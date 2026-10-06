@@ -45,10 +45,34 @@ Standards skills, applied to every cell:
 
 ## Installing
 
-- **Claude Code:** copy the folders under `skills/` into `~/.claude/skills/` (every project) or a
-  project's `.claude/skills/`.
-- **Claude.ai:** zip each skill folder and upload it under Settings, Capabilities, Skills.
-- **Other assistants:** attach the relevant `SKILL.md` files as instructions.
+Paste this prompt into Claude Code:
+
+```text
+Install the EDA skill suite from https://github.com/vanderbilt-ms-ai/eda-skill-suite. Clone the
+repository into a temporary folder, copy every folder under its skills/ directory into
+~/.claude/skills/ (replace any older copies of the same skills), then delete the temporary folder.
+Make sure the Python package nbformat is installed, since the notebook-standards lint script needs
+it. Finish by listing the nine installed skills.
+```
+
+- **One project only:** in that project, ask for the skills to go into `.claude/skills/` instead of
+  `~/.claude/skills/`.
+- **Updating:** paste the same prompt again.
+- **Without Claude Code:** in Claude.ai, zip each folder under `skills/` and upload it under
+  Settings, Capabilities, Skills. In other assistants, attach the `SKILL.md` files as instructions.
+
+## Using the skills
+
+Start a new Claude Code session so it picks up the skills, then describe the problem the way it
+reached you, for example:
+
+```text
+Here's an email from my director: "[the email]". I'm the data analyst. Help me investigate this in
+a Jupyter notebook using [the data source].
+```
+
+Claude loads `eda-workflow`, which brings in the other skills at each stage and stops to ask you at
+each decision that belongs to the analyst.
 
 ## The lint script
 
