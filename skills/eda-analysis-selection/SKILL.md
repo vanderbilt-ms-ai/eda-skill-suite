@@ -1,6 +1,6 @@
 ---
 name: eda-analysis-selection
-description: Given a hypothesis or question exactly as worded, choose the analysis that tests it and the figure that shows it - the comparison it implies, the measure and window, the variable classes, the summary, test, or model, and the plot type - write down before running it what result would refute it, run it, and state the verdict; then propose the next question when the obvious explanation fails. Use this skill whenever a hypothesis, claim, or question needs testing against data, or someone asks "how should I analyze this", "what chart should I use", or "is this unusual", including each step of digging deeper.
+description: Chooses the analysis and figure that test a hypothesis as worded, states the verdict, and proposes the next question. Use whenever a claim or question needs testing against data.
 ---
 
 # Choosing the analysis and the figure

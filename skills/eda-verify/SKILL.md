@@ -1,6 +1,6 @@
 ---
 name: eda-verify
-description: Verify a finished or in-progress analysis notebook before anyone relies on it - re-run it from a fresh kernel, lint it against the notebook, figure, and writing standards, trace every number in the findings, memo, and recap to an output, re-derive the key numbers independently from the data, confirm the unit of analysis survived every step, check that each hypothesis was tested as worded and each verdict follows, check the wording against what the data recorded, and look at every figure. Use this skill before handing over any analysis, after another skill or an AI assistant wrote notebook cells, or whenever someone asks to check, review, or verify an analysis.
+description: Checks an analysis notebook before anyone relies on it: re-runs it and confirms every number, word, and figure matches the data. Use before handing over any analysis.
 ---
 
 # Verify

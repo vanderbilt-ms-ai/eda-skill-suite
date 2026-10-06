@@ -1,6 +1,6 @@
 ---
 name: eda-data-quality
-description: Run and report every data-quality check an analysis needs before any question is answered - what a row is (duplicates, keys, totals rows, repeated values copied across entities), missing values (counts and shares overall and by group, blank vs zero vs sentinel codes, missing by design, whether missingness relates to other variables and so is not random, which analyses will silently drop rows), values and units (ranges, outliers, inconsistent categories, dates, irregular time series), coverage, a second-source check, and preprocessing decisions - each check shown as a table or chart with a "What we found" and an analyst decision. Use this skill whenever data has been loaded and before analysis, or whenever someone asks about cleaning, preprocessing, missing values, outliers, duplicates, or data quality, even if the data looks clean.
+description: Checks a dataset's quality before analysis, including missing values, and records each decision about what to do with the problems found. Use whenever data has been loaded or cleaning comes up.
 ---
 
 # Data quality and preprocessing

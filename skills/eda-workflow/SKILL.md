@@ -1,6 +1,6 @@
 ---
 name: eda-workflow
-description: Run an exploratory data analysis (EDA) investigation from a stakeholder's problem to a finished pair of Jupyter notebooks - a setup notebook (find and pull the data, initial checks, data quality and missing values, preprocessing, provenance) and an analysis notebook (hypotheses tested as worded, progressive digging deeper, models used as lenses, synthesis, limits, memo) - by sequencing the other EDA skills in this suite and handing each judgment call back to the analyst. Use this skill whenever someone brings a problem, a dataset, or a question and wants it explored, investigated, or analyzed, even if they only say "look into this data" or "why did X happen".
+description: Runs an exploratory data analysis (EDA) from a stakeholder's problem to finished Jupyter notebooks, calling the other EDA skills at each stage and handing judgment calls back to the analyst. Use whenever someone brings a problem, question, or dataset to investigate.
 ---
 
 # EDA workflow

@@ -1,6 +1,6 @@
 ---
 name: figure-standards
-description: The rules every figure in an analysis follows - choosing the plot type from the variables and the question, graphical integrity, color, and a figure a reader can understand without anyone standing next to it - a title, plain-language axis labels with units and direction, real tick values, labelled reference lines, no overlaps, and the five-step figure description. Use this skill whenever you draw, fix, or review a chart in a notebook or report, including when another EDA skill asks for a figure, even if the request only says "plot this".
+description: Creates high-quality figures and charts that follow best practices for communicating insights visually. Use whenever drawing, fixing, or reviewing a chart.
 ---
 
 # Figure standards

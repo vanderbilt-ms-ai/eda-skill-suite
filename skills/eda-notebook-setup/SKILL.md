@@ -1,6 +1,6 @@
 ---
 name: eda-notebook-setup
-description: Turn a stakeholder's problem into the start of an EDA - the brief (role, stakeholder, the observation with its numbers, the questions), falsifiable hypotheses, and a setup notebook that finds the data source, pulls the data itself, renames columns to consistent conventions, runs the first-look inspection (info, head, tail, sample, describe, the three tidy-data sentences, the unit of analysis), checks the data against facts already known, and records provenance. Use this skill at the start of any analysis, whenever someone hands over a problem, an email, or a dataset, even if they only say "here is the data" or "can you get the numbers on X".
+description: Turns a stakeholder's problem into questions and hypotheses, then builds the setup notebook that pulls, checks, and documents the data. Use at the start of any analysis.
 ---
 
 # EDA notebook setup
