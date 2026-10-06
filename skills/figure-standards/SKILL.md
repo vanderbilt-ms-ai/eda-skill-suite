@@ -82,5 +82,5 @@ figure, fix the figure. The takeaway belongs in "What we found", stated with its
 
 ## Reference
 
-- `references/examples.md` - figures from the finished case studies that broke these rules, and
-  their fixes.
+- `references/examples.md` - three figures that meet every rule and three that break at least one,
+  with images and a rule-by-rule check of each, plus shorter fixes.
