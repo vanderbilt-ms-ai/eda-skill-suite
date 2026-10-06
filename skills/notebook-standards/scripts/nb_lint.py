@@ -282,9 +282,11 @@ def check_finding(text, i, report):
         break
     # Bold labels ("- **Units.**") are not sentences, nor are list markers; other bold text is prose.
     prose = re.sub(r"^[ \t]*(?:[-*+]|\d+[.)])[ \t]+", "", BOLD_LABEL.sub("", body), flags=re.M).replace("**", "")
+    # "Does not apply: [why]" lines and questions ("Up for whom?") are not slogans.
+    prose = re.sub(r"(?im)^[ \t]*does not apply:.*$", "", prose)
     for sentence in re.split(r"(?<=[.!?])\s+", prose):
         words = sentence.strip().split()
-        if 0 < len(words) <= 5 and not re.search(r"\d", sentence):
+        if 0 < len(words) <= 5 and not re.search(r"\d", sentence) and not sentence.strip().endswith("?"):
             report("WARN", i, "writing: very short sentence in a finding (slogan?)", sentence.strip()[:60])
 
 

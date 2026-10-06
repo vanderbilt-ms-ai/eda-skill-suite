@@ -43,7 +43,9 @@ snippets for each check are in `references/checks.md`.
 ## 2. Missing values (always run, always report)
 
 1. **Count and share** missing per column, overall. Treat sentinel codes as missing first:
-   `"PrivacySuppressed"`, `"NULL"`, `"NA"`, `""`, whitespace, `-999`, `9999`, impossible zeros.
+   `"PrivacySuppressed"`, `"PS"`, `"NULL"`, `"NA"`, `""`, whitespace, `-999`, `9999`, impossible
+   zeros. Do not rely on a fixed list: find every text value in a column that should be numeric
+   (`references/checks.md`), because each release can use its own codes.
 2. **By group**: missing share per column by year, entity type, or other grouping the questions use.
    Missingness concentrated in one period or one kind of entity changes what a comparison means.
 3. **Blank vs zero vs not recorded**: is a blank "zero" (nothing happened), "not recorded" (a
@@ -81,6 +83,9 @@ snippets for each check are in `references/checks.md`.
 - **Categories**: inconsistent labels (whitespace, case, synonyms, codes); collapse rare
   categories only with a reason.
 - **Dates and times**: parsed on import; one time zone; the window the question needs.
+- **Money from different years**: dollars measured in different years (earnings in 2022 dollars,
+  prices in 2024 dollars) are not comparable until converted to one year's dollars with a price
+  index (the Consumer Price Index). Say which index and which year.
 - **Two columns for one concept** (academic-year cost vs program-year cost): combine with a rule
   and say which rows used which.
 - **Which period each column describes**: in a table of summaries, columns can describe different

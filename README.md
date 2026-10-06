@@ -61,10 +61,26 @@ finding, cells not executed) and warnings for a person to check, including any n
 the brief, the memo, or the recap that does not appear in an output. It needs Python 3 and
 `nbformat`.
 
-## Status and known limits
+## How the skills were tested
 
-- The skills went through two rounds of revision from four test runs, in which an agent received
-  only a problem statement and followed the skills. The last revision (limits on the opening
-  hypotheses, and size and simplicity targets) has not been tested yet.
-- Every test told the agent to read the skills. None has yet checked whether a plain Claude Code
-  session, given only a problem, loads the right skill from its description.
+Each test gave an agent only a stakeholder's problem and no data, and checked the two notebooks it
+produced against a finished case study:
+
+- three complete runs on the January 2026 Nashville ice storm, using NOAA weather records;
+- two complete runs on College Scorecard data, a question about college price and earnings that
+  needs regression, clustering, and classification;
+- one plain Claude Code session with the skills installed and a student-style prompt. It loaded
+  `eda-workflow` on its own and followed it through the other skills to two notebooks that pass the
+  lint.
+
+Each round's failures became rules. Examples: opening hypotheses written after looking at the data;
+the same files downloaded twice; one missing hour shortening a "hours in a row" count; notebooks
+twice the size of the examples; findings worked out in side scripts and written into the notebook
+afterwards.
+
+## Known limits
+
+- The tests ran unattended, so the agent made every "the analyst decides" call itself. With a
+  person in the loop, the skills stop and ask instead; that path has not been tested.
+- The last rule added (do the analysis in the notebook, and write each finding only after its
+  output exists) has not been retested.
