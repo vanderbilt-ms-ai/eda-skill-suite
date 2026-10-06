@@ -6,9 +6,15 @@ renamed columns.
 ## Sentinels to missing
 
 ```python
-SENTINELS = ["PrivacySuppressed", "NULL", "NA", "", " "]
-raw = raw.replace(SENTINELS, np.nan)
-(raw == -999).sum()[lambda s: s > 0]          # numeric sentinels: check before replacing
+# Text inside a column that should be numeric is a code for "missing" or "suppressed".
+# List every such value before replacing, because each release can use its own codes ("PS",
+# "PrivacySuppressed", "NULL").
+numeric_cols = ["col_a", "col_b"]             # the columns the documentation says are numbers
+as_numbers = raw[numeric_cols].apply(pd.to_numeric, errors="coerce")
+text_codes = raw[numeric_cols].where(as_numbers.isna() & raw[numeric_cols].notna()).stack()
+text_codes.value_counts().rename("rows")
+raw[numeric_cols] = as_numbers
+(raw[numeric_cols] == -999).sum()[lambda s: s > 0]   # numeric sentinels: check before replacing
 ```
 
 ## Missing values per column

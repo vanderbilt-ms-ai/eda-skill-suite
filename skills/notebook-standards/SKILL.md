@@ -28,7 +28,8 @@ reports before handing the notebook over. Its warnings need a human look; its er
      the hypothesis or question, and what result would support or refute it. Define every
      statistic at first use (slope, intercept, r, R-squared, silhouette, accuracy).
    - **Code cells** whose output shows the result (see "Cells show, markdown interprets").
-   - **A "What we found." markdown cell** that states the finding with the number that decides it
+   - **A "What we found." markdown cell**, written after the code has run and from its output,
+     that states the finding with the number that decides it
      and, for a hypothesis, the verdict in bold: **Hypothesis N holds / does not hold / is
      supported, not proven.**
 5. **Closing sections**: synthesis, limits (what the analysis cannot tell the stakeholder), and the
@@ -63,7 +64,8 @@ reports before handing the notebook over. Its warnings need a human look; its er
 
 A reader works through the notebook in one sitting. Finished case studies built with these
 skills set the scale:
-- a setup notebook of about 40 to 60 cells and 150 to 250 lines of code;
+- a setup notebook of about 40 to 70 cells and 150 to 250 lines of code (with about 20
+  data-quality checks, share tables between checks to stay in range);
 - an analysis notebook of about 60 to 75 cells and 200 to 300 lines of code, with 10 to 15 figures;
 - opening markdown of three to six sentences; a "What we found" of two to five.
 Every data-quality check still runs. Several checks can share one table, and a check that does not
@@ -73,10 +75,11 @@ questions, or code doing more than the lesson needs.
 ## Code
 
 - Simple enough for a student to read line by line: one-line groupbys; `assign` for new columns; a
-  boolean mask with a name (`storm_days = ...`) instead of nested `np.where`; a plain DataFrame built
+  boolean mask with a name (`final_week = ...`) instead of nested `np.where`; a plain DataFrame built
   from named Series instead of a dictionary comprehension; a code cell of about 15 lines or fewer.
   No clever plumbing the lesson does not need.
-- One small helper function only for a chart drawn many times; it takes its data as arguments.
+- A small helper function only for a chart or a calculation repeated many times; it takes its
+  data as arguments.
 - Colors set where the plot is drawn; **no module-level style constants** (`FOCUS = "#b8432f"`).
 - Comments explain **why**, never restate what the line does. `# True counts as 1` earns its place;
   `# group by year` does not. Most cells need no comment because the markdown above explains them.

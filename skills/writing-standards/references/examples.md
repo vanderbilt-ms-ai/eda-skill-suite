@@ -18,4 +18,4 @@ From case-study drafts, most from the 2020 polls case. Bracketed parts stand for
 | "It is worth noting that the data tells an interesting story here." | filler, slogan | (delete; state the finding) |
 | "Sample size doesn't really seem to matter much." | no number, no verdict | "The smallest quarter of polls missed by 5.2 points, the largest by 5.1. **Hypothesis 1 does not hold.**" |
 | "The flag is blank, so it did not happen." | blank read as absence | "The flag is blank in every year, including years when other records show the event happened; it was not recorded." |
-| "0.834 of flagged schools" next to "93.6 percent correct" | shares written two ways | Write every share the same way in one document: "83.4 percent of the flagged schools". |
+| "0.834 of flagged schools" next to "93.6 percent correct" | shares written two ways | Write every share the same way in one document, prose and axes alike: "83.4 percent of the flagged schools", and axes in percent. |

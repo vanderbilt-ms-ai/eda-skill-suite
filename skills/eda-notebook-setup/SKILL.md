@@ -18,8 +18,10 @@ answer and a dataset whose shape and origin are known. Follow `notebook-standard
 - The stakeholder's request, quoted.
 - The question or questions it reduces to, worded to match the observation and no broader
   ("Why were the polls off?", not "What went wrong?").
-- If the observation's numbers come from the data, the setup notebook computes them in a short
-  final section, "The numbers the brief quotes", and the brief cites it.
+- Write the observation first as the stakeholder reports it, which is enough to write the
+  questions and hypotheses. After the pull, the setup notebook computes the observation's numbers in
+  a short final section, "The numbers the brief quotes", and the brief is updated to cite them. The
+  questions and hypotheses do not change when the numbers arrive.
 
 *The analyst decides* the questions.
 
@@ -34,12 +36,13 @@ verdict.
 
 **Which hypotheses come first.** The opening hypotheses are the explanations already on the table,
 not the analyst's own theory of what happened:
-- the explanations the stakeholder, or the people around them, already give ("it was the coldest,
-  wettest January in years"; "the polls had small samples") - tested exactly as worded, because they
+- the explanations the stakeholder, or the people around them, already give ("the polls had small
+  samples"; "the polls missed late deciders") - tested exactly as worded, because they
   are usually wrong and testing them is the point;
 - the obvious checks the stakeholder would expect (was it unusual at all?);
 - **one** "something else" hypothesis, stated at the level of the question, not as a mechanism:
-  "Neither: something about the storm itself, not the month as a whole, made it different." It is
+  "Neither: something about where the polls were taken, not how they were run, explains the
+  error." It is
   one claim, with one verdict.
 
 Do **not** write opening hypotheses that need knowledge of what the data will show: a specific
@@ -51,7 +54,7 @@ written the answer in advance.
 - Each question gets its own numbered hypotheses, as full sentences that could be false.
 - **Test the stakeholder's words.** List the words in the request that carry a claim and say what
   each one requires: "pays off" compares a gain with its cost, not only "more goes with more";
-  "coldest in years" names a window (say which, and pull it); "could we have told in advance"
+  "the worst in years" names a window (say which, and pull it); "could we have told in advance"
   means using only what was known before the outcome.
 - **Say how big a difference has to be to matter.** Each refutation names the smallest difference
   that would change the stakeholder's decision, not only its direction ("refuted if the gain does
@@ -60,7 +63,7 @@ written the answer in advance.
 - **One claim per hypothesis.** A hypothesis that bundles several claims ("the month was cold and
   wet and windy") gets split, so each has its own verdict. "Holds on one of three parts" is not a
   verdict.
-- **Claims about a rank** ("the coldest in years"): the rank in the named window is the test; a
+- **Claims about a rank** ("the worst in years"): the rank in the named window is the test; a
   margin is not needed. If one is wanted, base it on the ordinary year-to-year spread (the standard
   deviation across years), not on a number invented for the case.
 - Number the hypotheses in the order they will be tested.

@@ -17,7 +17,7 @@ Write down, in the section's opening markdown:
 - **The comparison it implies**: compared with what? ("the polls missed by more in 2020 than in
   2012" compares one election against another, on the same kind of poll and the same final weeks.)
 - **The measure the wording requires**: a claim about the month is tested with monthly numbers
-  (total, average, coldest value of the month); a claim about one day with daily numbers.
+  (total, average, most extreme value of the month); a claim about one day with daily numbers.
 - **The unit and window**: same days across years; the case's own period excluded from its
   baseline.
 - **The variable classes**: continuous or discrete numeric; nominal, ordinal, or binary

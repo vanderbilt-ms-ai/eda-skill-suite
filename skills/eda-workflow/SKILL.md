@@ -68,17 +68,29 @@ At every point marked "the analyst decides":
   alternative, why), and add it to `decisions.md` beside the notebooks. Never hide a decision in
   code.
 
+## The notebook is where the investigation happens
+
+Do the exploring in the notebooks, in order, one section at a time: write the section's opening
+markdown and code, run it, read the output, then write its "What we found" from that output. Do
+not work the analysis out in side scripts or a scratch session and then transcribe the conclusions
+into a notebook, and never write a finding (or a placeholder number to fill in later) before the
+output it cites exists. A notebook assembled afterwards reads like an investigation without having
+been one: its sections follow the conclusion instead of leading to it, and its findings are not
+tied to the outputs above them. Small checks on how a file is formatted, before the request is
+written, are fine; anything that looks at the values the questions are about belongs in a notebook
+section.
+
 ## "Something else?"
 
 After the opening hypotheses are tested, one section looks at the case itself with no hypothesis:
-the same measures at a finer grain (the storm's days instead of the month; one state instead of the
-nation), and the case's rank on a few measures nobody named. It lists what stands out, and ends with
-the candidate next questions and the one chosen. Each later digging-deeper section starts from one
-of them.
+the same measures at a finer grain (the event's days instead of the month; one state instead of the
+nation), and the case's rank on a few measures nobody named. It lists what stands out, adds the
+next questions the hypothesis sections already raised, and ends with the candidate list and the one
+chosen. Each later digging-deeper section starts from one of them.
 
 ## Where derived tables are built
 
-A derived table the hypotheses define before any data (one row per storm, per state, per college)
+A derived table the hypotheses define before any data (one row per event, per state, per institution)
 is built in the setup notebook's preprocessing and saved. A table that a later finding calls for is
 built in the analysis section that needs it.
 

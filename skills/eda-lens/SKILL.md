@@ -58,8 +58,9 @@ table, "What we found") and ends with "**Next questions.**"
   before the outcome period; a feature derived from the outcome, or measured after it, is leakage
   and makes the classifier look better than it is. Make a table of each feature and when it is
   known.
-- **Features chosen by looking at every row leak too.** If earlier sections chose the features by
-  comparing the label across all rows, the test rows helped choose them. Split first and choose
+- **Features chosen by looking at every row leak too.** Features named in the hypotheses, before
+  the data was pulled, are fine. If earlier sections chose further features by comparing the label
+  across all rows, the test rows helped choose them. Split first and choose
   features on the training rows only, or say the test is optimistic.
 - **Very few positives** (fewer than about 20): a train/test split leaves too few to test. Use
   leave-one-out (fit on all cases but one, predict that one, repeat), or evaluate on all cases and
@@ -72,7 +73,16 @@ table, "What we found") and ends with "**Next questions.**"
   boundary.
 - **Baseline first**: the accuracy of always predicting the most common class.
 - **Split before anything else** (`train_test_split`, stratified on the label); fit any scaling on
-  the training rows only; touch the test rows once.
+  the training rows only; touch the test rows once. To try a feature the misses suggest, compare
+  models by cross-validation on the training rows (`cross_val_score`), then score the chosen model
+  on the test rows once.
+- **When every available feature was measured after the outcome** (a single recent release), the
+  classifier cannot show what was knowable in advance. Either pull an earlier release for the
+  features (*the analyst decides*: it may be a large download), or keep the verdict at **supported,
+  not proven** and say why.
+- **Precision and recall in one hypothesis**: fix one as the setting and test the other ("at the
+  setting that catches 80 percent of the cases, at least half of the flags are right"). That is one
+  claim.
 - Models: logistic regression (read coefficients as changes in the odds), k-nearest neighbors; a
   threshold rule counts as a classifier too.
 - **Report the confusion matrix**, accuracy, precision, and recall, and say which error matters
