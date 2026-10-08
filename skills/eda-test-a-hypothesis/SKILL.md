@@ -35,8 +35,8 @@ Write down, in the section's opening markdown:
 | events concentrate in time | the series at a finer grain (month, then day, then hour); resample irregular readings first | bars by day; a line by hour |
 | something lasted or accumulated | duration past a threshold; the longest unbroken run; a cumulative sum, with gaps handled as `eda-check-the-data` says | cumulative line, every case drawn, the case highlighted |
 | a combination of conditions explains it | how many cases meet each condition alone, and how many meet all | scatter of the two conditions with threshold lines |
-| there are kinds of cases | clustering; hand to `eda-apply-a-lens` | scatter colored by cluster |
-| we could have told in advance | a rule or classifier evaluated on every case, with the cases it misses; hand to `eda-apply-a-lens` | scatter with thresholds; confusion matrix |
+| there are kinds of cases | clustering; hand to `eda-model` | scatter colored by cluster |
+| we could have told in advance | a rule or classifier evaluated on every case, with the cases it misses; hand to `eda-model` | scatter with thresholds; confusion matrix |
 | this pattern explains the event | the same analysis where the event did not happen (other years, other groups) | the same chart for the comparison case, adjacent |
 
 The figure rules (every observation shown for a numeric predictor, the highlight, matched pairs,

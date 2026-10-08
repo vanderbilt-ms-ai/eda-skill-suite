@@ -27,7 +27,7 @@ the code and gets the same numbers. Every rule below serves one of those two rea
    - A "**What we found.**" markdown cell, written after the code has run and from its output,
      that states the finding with the number that decides it and, for a hypothesis, the verdict in
      bold (`eda-test-a-hypothesis`, The verdict).
-   Lens sections add two more parts (`eda-apply-a-lens`, Output of every lens section).
+   Lens sections add two more parts (`eda-model`, Output of every lens section).
 5. Closing sections: synthesis, limits (what the analysis cannot tell the stakeholder), the memo,
    and the recap table.
 
