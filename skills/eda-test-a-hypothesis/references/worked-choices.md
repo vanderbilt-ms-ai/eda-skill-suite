@@ -53,7 +53,7 @@ in `SKILL.md`, not rules of their own.
   case.
 - Figure: every period as a point, the threshold as a labelled line, the case highlighted.
 - Caution: a threshold chosen after seeing the case will flag the case; test it on years not used
-  to choose it, or say it is untested (`eda-apply-a-lens`, Overfitting check).
+  to choose it, or say it is untested (`eda-model`, Overfitting check).
 
 ## "Paying more pays off." (pattern; from College Scorecard)
 

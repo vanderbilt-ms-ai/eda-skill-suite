@@ -36,7 +36,7 @@ rule is changed in one place.
 | `eda-get-the-data` | the data source; the request; the first look; checks against known facts; provenance |
 | `eda-check-the-data` | every quality check, including missing values and gaps in a series; the data-quality budget; preprocessing |
 | `eda-test-a-hypothesis` | reading a claim; the analysis for each kind of claim; the verdict rules (as worded, the size that matters, a failed hypothesis stays failed); the next hypothesis |
-| `eda-apply-a-lens` | regression, clustering, and classification as lenses; leakage; the lens section's extra parts |
+| `eda-model` | regression, clustering, and classification as lenses; leakage; the lens section's extra parts |
 | `eda-verify-the-analysis` | the verification steps and the verification report |
 | `eda-write-the-notebook` | section structure and the three parts of a section; cells show and markdown interprets; column naming; notebook size; code rules; runs top to bottom |
 | `eda-draw-a-figure` | plot choice; titles, labels, ticks, reference lines; integrity; color and the highlight; matched pairs; the five-step description |

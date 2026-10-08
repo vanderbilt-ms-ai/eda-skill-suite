@@ -110,7 +110,7 @@ Only what the questions need, each step explained before it runs:
 - reshape (long or wide) to the shape the analysis needs, and say why;
 - derived variables: define them, and say what they assume;
 - transformations (log for a skewed range, scaling for distance-based methods, encoding for
-  categories) when a planned method requires them; `eda-apply-a-lens` says which;
+  categories) when a planned method requires them; `eda-model` says which;
 - save the cleaned table; the raw download stays unchanged.
 
 ## Reference

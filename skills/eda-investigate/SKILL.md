@@ -21,7 +21,7 @@ the simplification drops), then look one layer deeper ("the mean is 47; what is 
 distribution?"). The investigation is a chain of questions. Each look at the data produces the
 next question, and a question worth the reader's time is written as a hypothesis with its
 refutation before it is tested (`eda-write-hypotheses`, Hypotheses). Clustering, regression, and
-classification are lenses inside the loop (`eda-apply-a-lens`), and a model is the end of the analysis
+classification are lenses inside the loop (`eda-model`), and a model is the end of the analysis
 only when building it was the goal.
 
 ## Stages and skills
@@ -33,7 +33,7 @@ only when building it was the goal.
 | 2. Data quality: what a row is, missing values, values and units, coverage, preprocessing | `eda-check-the-data` | what each problem means and what to do about it |
 | 2b. Hypotheses from the first look (series B): what the univariate views and the quality checks suggest, written as hypotheses with refutations before they are tested | `eda-write-hypotheses` | which of them to test and in what order |
 | 3. Test each hypothesis as worded; after each verdict, the next question, as a series B hypothesis | `eda-test-a-hypothesis` | whether the test matches the claim; the verdict; the next hypothesis |
-| 4. Models as lenses | `eda-apply-a-lens` | the target and features; k; whether groups mean anything; which surfaced cases to chase |
+| 4. Models as lenses | `eda-model` | the target and features; k; whether groups mean anything; which surfaced cases to chase |
 | 5. Synthesis, limits, memo | `eda-write-about-data` | the interpretation, the recommendation |
 | 6. Verify | `eda-verify-the-analysis`, `eda-run-a-script` | sign-off |
 
@@ -111,7 +111,7 @@ After each finding, list candidate next questions and pick one (or ask). The sta
 - How long did it last? What accumulated?
 - Up for whom? Does the aggregate hide subgroups that differ?
 - Does the pattern also appear where the event did not happen? (before calling it the cause)
-- What does the model's residual, cluster, or miss point at? (`eda-apply-a-lens`)
+- What does the model's residual, cluster, or miss point at? (`eda-model`)
 
 The chosen question becomes the next series B hypothesis, with its refutation, before its section
 runs.

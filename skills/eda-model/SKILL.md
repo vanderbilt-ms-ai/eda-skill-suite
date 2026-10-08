@@ -1,9 +1,9 @@
 ---
-name: eda-apply-a-lens
+name: eda-model
 description: Uses regression, clustering, and classification in the middle of an analysis to find what to investigate next. Use whenever an analysis calls for a model.
 ---
 
-# Models as lenses
+# Model
 
 In exploration a model is a way of looking one layer deeper, not the end of the analysis. Fit it,
 check it is sound, then read what it surfaces: those cases are the next hypotheses. Each lens
