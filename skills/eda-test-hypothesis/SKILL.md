@@ -1,5 +1,5 @@
 ---
-name: eda-test-a-hypothesis
+name: eda-test-hypothesis
 description: Chooses the analysis and figure that test a hypothesis as worded, states the verdict, and writes the next hypothesis. Owns the verdict rules. Use whenever a claim or question needs testing against data.
 ---
 
@@ -33,14 +33,14 @@ Write down, in the section's opening markdown:
 | Y rises or falls with X (two numeric) | scatter plus a regression line: slope in the data's units, r, R-squared; a log scale when X spans orders of magnitude | scatter with the line |
 | Y differs by category after accounting for X | multiple regression; compare R-squared with and without each block of variables | bars of R-squared by model; a table of coefficients |
 | events concentrate in time | the series at a finer grain (month, then day, then hour); resample irregular readings first | bars by day; a line by hour |
-| something lasted or accumulated | duration past a threshold; the longest unbroken run; a cumulative sum, with gaps handled as `eda-check-the-data` says | cumulative line, every case drawn, the case highlighted |
+| something lasted or accumulated | duration past a threshold; the longest unbroken run; a cumulative sum, with gaps handled as `eda-check-data` says | cumulative line, every case drawn, the case highlighted |
 | a combination of conditions explains it | how many cases meet each condition alone, and how many meet all | scatter of the two conditions with threshold lines |
 | there are kinds of cases | clustering; hand to `eda-model` | scatter colored by cluster |
 | we could have told in advance | a rule or classifier evaluated on every case, with the cases it misses; hand to `eda-model` | scatter with thresholds; confusion matrix |
 | this pattern explains the event | the same analysis where the event did not happen (other years, other groups) | the same chart for the comparison case, adjacent |
 
 The figure rules (every observation shown for a numeric predictor, the highlight, matched pairs,
-titles and labels) are in `eda-draw-a-figure`.
+titles and labels) are in `eda-draw-figure`.
 
 ## 3. Run it, then state the verdict
 

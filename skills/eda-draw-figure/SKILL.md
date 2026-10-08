@@ -1,5 +1,5 @@
 ---
-name: eda-draw-a-figure
+name: eda-draw-figure
 description: Draws figures that make their point without the analyst in the room, in an analysis notebook, memo, or report. Owns plot choice, titles, labels, integrity, color, highlight, and matched pairs. Use whenever drawing, fixing, or reviewing a chart, including requests that never say "figure standards" such as "plot this" or "why is this chart confusing".
 ---
 
@@ -9,7 +9,7 @@ A figure makes its point without the analyst in the room: a reader gets it withi
 seconds. Four principles cover most of what that takes: graphical integrity, keep it simple, use
 color sensibly, use the right plot type. The rules below make those concrete and checkable.
 
-After drawing a figure, look at the rendered image (`eda-run-a-script/scripts/figures.py` writes every
+After drawing a figure, look at the rendered image (`eda-scripts/scripts/figures.py` writes every
 figure in a notebook to PNG). Overlapping titles, a legend over the data, unreadable ticks, and
 truncated labels are only visible in the render.
 
@@ -38,7 +38,7 @@ truncated labels are only visible in the render.
   ("2020 polls: average error by sample size"); in a memo or report figure it states the finding
   ("Large and small polls missed by the same amount").
 - Axis labels in plain language with the unit and, for signed quantities, the direction ("Average
-  error (points; above 0 = overstated Biden)"); never a variable name (`eda-write-about-data`).
+  error (points; above 0 = overstated Biden)"); never a variable name (`eda-write-prose`).
 - Real tick values: group bars carry their actual ranges ("138 to 637"), not "small" and "large";
   every bar labelled; log axes show plain numbers (1,000 and 10,000, not 10^3).
 - Reference lines are labelled: a threshold the question names, zero, the result, the average.

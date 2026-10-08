@@ -16,8 +16,8 @@ What it can check automatically (everything else in the standards needs reading)
   writing   - non-ASCII punctuation; stock phrases and idioms (ERROR); variable names in findings
               (ERROR); reversals, framing sentences, wording that may claim more than the record,
               and markdown cells over 200 words (WARN)
-  hypotheses - a "Hypothesis ..." section whose opening markdown has no "Refuted if" (ERROR); a
-              "Digging deeper ..." or "Lens ..." section without one (WARN)
+  hypotheses - a "Hypothesis ...", "Digging deeper ...", or "Lens ..." section whose opening
+              markdown has no "Refuted if" (ERROR)
   --trace   - numbers quoted in the markdown that no output shows:
               "What we found" cells     against the outputs above them (also inside a synthesis)
               other cells under a Synthesis, Memo, or Recap heading
@@ -208,7 +208,7 @@ def lint(path, trace=False):
         if lowered.startswith("hypothesis"):
             return "ERROR"
         if lowered.startswith("digging deeper") or lowered.startswith("lens"):
-            return "WARN"
+            return "ERROR"
         return None
 
     def close_section():

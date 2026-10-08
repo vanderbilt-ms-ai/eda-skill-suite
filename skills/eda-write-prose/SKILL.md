@@ -1,5 +1,5 @@
 ---
-name: eda-write-about-data
+name: eda-write-prose
 description: Keeps writing about data plain, precise, and supported by the numbers, in notebook markdown, findings, memos, figure text, and summaries. Owns every prose rule in the suite. Use whenever writing or reviewing text about an analysis.
 ---
 
@@ -49,7 +49,7 @@ Each finding makes three moves:
    by 3.5 points on average."
 2. Interpret what it means in context: "Late polls missed less than mid-October polls, but in the
    same direction."
-3. Conclude what follows for the question: the verdict (`eda-test-a-hypothesis`, The verdict), or
+3. Conclude what follows for the question: the verdict (`eda-test-hypothesis`, The verdict), or
    the next hypothesis.
 
 In a memo or report, lead with the conclusion (conclusion, evidence, method).
@@ -57,7 +57,7 @@ In a memo or report, lead with the conclusion (conclusion, evidence, method).
 ## Words that match the data
 
 - Every claim carries its number, and the number traces to an output in the notebook
-  (`eda-write-the-notebook`, Cells show).
+  (`eda-write-notebook`, Cells show).
 - Say what the data recorded, not more: "freezing rain was reported", not "freezing rain fell",
   when the record is an observer's report; "the most of any January in the 30 pulled", not "a
   record"; a duration measured from readings, not a claim about what the readings did not measure.

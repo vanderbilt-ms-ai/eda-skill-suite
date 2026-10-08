@@ -1,5 +1,5 @@
 ---
-name: eda-check-the-data
+name: eda-check-data
 description: Checks a dataset's quality before analysis, including missing values, and records each decision about what to do with the problems found. Use whenever data has been loaded or cleaning comes up.
 ---
 
@@ -10,12 +10,12 @@ values in the analysis window" is a finding, and the reader needs the evidence f
 nobody checked for quietly produces a wrong number later.
 
 This stage looks at one variable at a time and at how the data was recorded. A comparison that
-tests a hypothesis belongs in the analysis notebook (`eda-test-a-hypothesis`). What these views
+tests a hypothesis belongs in the analysis notebook (`eda-test-hypothesis`). What these views
 suggest is not lost: when the section is done, the analyst writes series B hypotheses from it
 (`eda-write-hypotheses`, Hypotheses).
 
 Each check, or group of related checks, is one subsection with the three parts every section has
-(`eda-write-the-notebook`, Structure). Where a problem needs a choice, add an "**Analyst
+(`eda-write-notebook`, Structure). Where a problem needs a choice, add an "**Analyst
 decision.**" paragraph (`eda-investigate`, Handing decisions back). Code for each check is in
 `references/checks.md`.
 
@@ -95,7 +95,7 @@ its own subsection earns one.
 
 ## 4. Coverage, the pull itself, and a second source
 
-- Every response covers what was requested: the fetch helper's table (`eda-run-a-script`) of piece, rows,
+- Every response covers what was requested: the fetch helper's table (`eda-scripts`) of piece, rows,
   first and last date or entity, and status is shown here and read.
 - What the data covers and what it does not (periods, entities, kinds of cases); what that leaves
   out of the question's scope.

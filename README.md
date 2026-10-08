@@ -33,15 +33,15 @@ rule is changed in one place.
 |---|---|
 | `eda-investigate` | the stages and their order; the deliverables; handing decisions back ("Analyst decision."); doing the analysis in the notebook; "Something else?"; looping back; where the next question comes from |
 | `eda-write-hypotheses` | the brief; the hypothesis form and the two series (A before data, B after looking) |
-| `eda-get-the-data` | the data source; the request; the first look; checks against known facts; provenance |
-| `eda-check-the-data` | every quality check, including missing values and gaps in a series; the data-quality budget; preprocessing |
-| `eda-test-a-hypothesis` | reading a claim; the analysis for each kind of claim; the verdict rules (as worded, the size that matters, a failed hypothesis stays failed); the next hypothesis |
+| `eda-get-data` | the data source; the request; the first look; checks against known facts; provenance |
+| `eda-check-data` | every quality check, including missing values and gaps in a series; the data-quality budget; preprocessing |
+| `eda-test-hypothesis` | reading a claim; the analysis for each kind of claim; the verdict rules (as worded, the size that matters, a failed hypothesis stays failed); the next hypothesis |
 | `eda-model` | regression, clustering, and classification as lenses; leakage; the lens section's extra parts |
-| `eda-verify-the-analysis` | the verification steps and the verification report |
-| `eda-write-the-notebook` | section structure and the three parts of a section; cells show and markdown interprets; column naming; notebook size; code rules; runs top to bottom |
-| `eda-draw-a-figure` | plot choice; titles, labels, ticks, reference lines; integrity; color and the highlight; matched pairs; the five-step description |
-| `eda-write-about-data` | every prose rule: plain statements, no aphorisms, idioms, figurative language, framing sentences, or fragments; observation before question; describe, interpret, conclude; words that match the data; length; emphasis; plain ASCII |
-| `eda-run-a-script` | the scripts: `nb_lint.py`, `fetch.py`, `figures.py`, `check_order.py` |
+| `eda-verify` | the verification steps and the verification report |
+| `eda-write-notebook` | section structure and the three parts of a section; cells show and markdown interprets; column naming; notebook size; code rules; runs top to bottom |
+| `eda-draw-figure` | plot choice; titles, labels, ticks, reference lines; integrity; color and the highlight; matched pairs; the five-step description |
+| `eda-write-prose` | every prose rule: plain statements, no aphorisms, idioms, figurative language, framing sentences, or fragments; observation before question; describe, interpret, conclude; words that match the data; length; emphasis; plain ASCII |
+| `eda-scripts` | the scripts: `nb_lint.py`, `fetch.py`, `figures.py`, `check_order.py` |
 
 ## Installing
 
@@ -75,11 +75,11 @@ each decision that belongs to the analyst.
 
 ## The tools
 
-All scripts are in `skills/eda-run-a-script/scripts/` and need Python 3 and `pandas`:
+All scripts are in `skills/eda-scripts/scripts/` and need Python 3 and `pandas`:
 
 | Script | What it does |
 |---|---|
-| `nb_lint.py NB.ipynb --trace` | errors for breaches a script can see (missing titles or labels, prose prints, sections without a finding, hypothesis sections without "Refuted if", cells not executed, non-ASCII, idioms); warnings for a person to read (framing sentences, reversals, wording beyond the record, cells over 200 words, and every quoted number that no output shows) |
+| `nb_lint.py NB.ipynb --trace` | errors for breaches a script can see (missing titles or labels, prose prints, sections without a finding, sections that test something without "Refuted if", cells not executed, non-ASCII, idioms); warnings for a person to read (framing sentences, reversals, wording beyond the record, cells over 200 words, and every quoted number that no output shows) |
 | `fetch.py` | copied into the project as `tools/fetch.py`; fetches each piece once, checks the response before saving, retries, and reports a table of pieces |
 | `figures.py NB.ipynb OUT/` | writes every figure to PNG so each one is looked at |
 | `check_order.py DIR --stamp` and `check_order.py DIR` | records a hash and time for `hypotheses.md`, then checks the data was pulled after it and the analysis notebook carries it verbatim |

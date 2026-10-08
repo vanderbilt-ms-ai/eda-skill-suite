@@ -1,5 +1,5 @@
 ---
-name: eda-write-the-notebook
+name: eda-write-notebook
 description: Keeps analysis notebooks clear, reproducible, and easy to follow. Owns the section structure, the cells-show rule, naming, size, and code rules. Use whenever creating, editing, or reviewing a Jupyter notebook for data analysis.
 ---
 
@@ -8,7 +8,7 @@ description: Keeps analysis notebooks clear, reproducible, and easy to follow. O
 An analysis notebook is an argument a reader can follow: someone who is not a data scientist reads
 the markdown and understands what was asked, what was done, and what was found; a colleague re-runs
 the code and gets the same numbers. Every rule below serves one of those two readers. The lint in
-`eda-run-a-script` checks what it can; run it after writing or editing a notebook.
+`eda-scripts` checks what it can; run it after writing or editing a notebook.
 
 ## Structure
 
@@ -26,7 +26,7 @@ the code and gets the same numbers. Every rule below serves one of those two rea
    - Code cells whose output shows the result.
    - A "**What we found.**" markdown cell, written after the code has run and from its output,
      that states the finding with the number that decides it and, for a hypothesis, the verdict in
-     bold (`eda-test-a-hypothesis`, The verdict).
+     bold (`eda-test-hypothesis`, The verdict).
    Lens sections add two more parts (`eda-model`, Output of every lens section).
 5. Closing sections: synthesis, limits (what the analysis cannot tell the stakeholder), the memo,
    and the recap table.
@@ -54,16 +54,16 @@ the code and gets the same numbers. Every rule below serves one of those two rea
 - lower_snake_case; the unit in the name (`poll_margin_pts`, `earnings_usd`); the same quantity
   has the same name in every file; codes become words (`FM-15` to `routine`).
 - Source names appear only where an API or file format requires them.
-- Variables are named in code and nowhere else (`eda-write-about-data`, No variable names).
+- Variables are named in code and nowhere else (`eda-write-prose`, No variable names).
 
 ## Size
 
 A reader works through a notebook in one sitting:
 - a setup notebook of about 50 to 80 cells and 200 to 350 lines of code, with the data-quality
-  section inside the budget `eda-check-the-data` sets;
+  section inside the budget `eda-check-data` sets;
 - an analysis notebook of about 60 to 80 cells and 200 to 300 lines of code, with 10 to 15
   figures;
-- markdown lengths as `eda-write-about-data` (Length) sets them.
+- markdown lengths as `eda-write-prose` (Length) sets them.
 Going well past this scale usually means sections that do not serve the questions, or code doing
 more than the lesson needs.
 
@@ -74,7 +74,7 @@ more than the lesson needs.
   built from named Series; a code cell of about 15 lines or fewer. No clever plumbing the lesson
   does not need.
 - A small helper function only for a chart or a calculation repeated many times; it takes its data
-  as arguments. The download helper comes from `eda-run-a-script`, not from the notebook.
+  as arguments. The download helper comes from `eda-scripts`, not from the notebook.
 - Colors set where the plot is drawn; no module-level style constants.
 - Comments explain why, never restate what the line does. Most cells need no comment because the
   markdown above explains them.
