@@ -12,7 +12,7 @@ From case-study drafts and test runs. Bracketed parts stand for a case's own num
 | "The data tells us that late polls were better." | personification | "Polls from the final week missed by 3.5 points on average; polls from mid-October by 5.1." |
 | "The polls were biased against Republicans." | claims beyond the data (bias names a cause) | "National polls overstated Biden's margin: 8.4 points on average, against a result of 4.4." |
 | "1.66 inches fell as freezing rain over 16 hours." | beyond the record | "1.66 inches of precipitation was recorded over 16 hours in which freezing rain was reported." |
-| "[Case] set a record." | overclaim | "[Case] had [value], the most of any [case] in [the window pulled]." |
+| "[Case] set a record." | overclaim | "[Case] had [value], the most of any [case] in [the years requested]." |
 | "2020: +8.4 vs +4.4" | shorthand | "National polls put Biden ahead by 8.4 points on average; he won by 4.4." |
 | "Hypothesis 2 partly holds, depending on the measure." | repairing a failed hypothesis | "[The measure the hypothesis names] was [value], below the [comparison] of [value]. **Hypothesis 2 does not hold.** [The other measure] is hypothesis B3." |
 | "Hypothesis 3 holds on one of its three parts." | a verdict on a bundle | Split it into three hypotheses before testing, each with its own refutation and verdict. |

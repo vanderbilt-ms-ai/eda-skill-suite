@@ -28,21 +28,21 @@ in `SKILL.md`, not rules of their own.
 
 ## "[This period] was [more extreme] than [the same period in other years]." (pattern; from the ice storm)
 
-- Comparison: one period against the same calendar window in every other year pulled.
+- Comparison: one period against the same calendar dates in every other year requested.
 - Measure the wording requires: the period's own number (its total, its average, its most extreme
   value), not one day inside it.
-- Analysis: that number per year; the case's rank with its window ("4th of 30"); the average of
+- Analysis: that number per year; the case's rank among the years compared ("4th of 30"); the average of
   the other years.
 - Figure: one bar per year, the case highlighted, the average as a labelled line.
 - Mistake made first: calling the claim "partly true" because one day inside the period was
-  extreme. The single day is a different measure; after the claim fails it becomes a series B
+  extreme. The single day is a different measure; after the claim fails it becomes a second-set
   hypothesis.
 
 ## "[Something] lasted longer than usual." (pattern; from the ice storm)
 
 - Irregular readings mean counting rows does not count periods: resample first
   (`eda-check-data`, What a row is).
-- Analysis: periods past the threshold per year in the same window; the longest unbroken run; the
+- Analysis: periods past the threshold per year over the same dates; the longest unbroken run; the
   cumulative count.
 - Gaps are handled as `eda-check-data` (Gaps in a series) says, and the finding says which way.
 - Figure: cumulative count past the threshold, one line per year, the case highlighted.

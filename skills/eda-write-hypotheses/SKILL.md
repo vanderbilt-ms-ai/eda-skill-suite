@@ -1,68 +1,90 @@
 ---
 name: eda-write-hypotheses
-description: Writes the brief, the questions, and the hypotheses of an investigation, before any data (series A) and again from what the data shows (series B), each with what would refute it. Owns the hypothesis rules. Use at the start of an analysis and whenever a finding raises a question worth testing.
+description: Writes the brief and the hypotheses of an investigation, first from the request alone and later from what the data shows, each with the result that would refute it. Use at the start of an analysis and whenever a finding raises a question.
 ---
 
-# Write the hypotheses
+# The brief and the hypotheses
 
-A question worth the reader's time is written as a hypothesis with its refutation before it is
-tested. This skill owns the brief and every rule about hypotheses; `eda-get-data` builds the
-setup notebook, and `eda-test-hypothesis` tests what is written here.
+**Inputs.** At the start: the stakeholder's request as it arrived, and nothing else. Later: the
+outputs of the setup notebook (the first look and the data-quality checks) or a finding in the
+analysis notebook.
 
-## The brief (first cell of the analysis notebook)
+**Produces.** At the start: `hypotheses.md` in the project folder, holding the brief and the first
+hypotheses; the same text becomes the first two cells of the analysis notebook. Later: a
+hypothesis written into the analysis notebook at the point it is needed.
 
-- Who the analyst is, who is asking, and what situation prompted it.
-- The observation, stated before any question (`eda-write-prose`, Observation before
-  question). Write it first as the stakeholder reports it. After the pull, the setup notebook
-  computes the observation's numbers in its last section, "The numbers the brief quotes", and the
-  brief is updated to cite them. The questions do not change when the numbers arrive.
-- The stakeholder's request, quoted.
-- The question or questions it reduces to.
+The two notebooks are defined in `eda-investigate`.
+
+## The brief
+
+The brief is the first cell of the analysis notebook. It is written from the request. It holds:
+- who the analyst is, who is asking, and what happened that made them ask;
+- the observation, stated before any question: what was measured, by how much, compared with what
+  (`eda-write-prose`, Observation before question). At this point the numbers are the
+  stakeholder's. After the data is downloaded, the setup notebook computes them in its last
+  section and the brief is updated to cite them. The questions do not change when the numbers
+  arrive;
+- the stakeholder's request, quoted;
+- the question or questions the request reduces to.
 
 *The analyst decides* the questions.
 
-## Hypotheses
+## What every hypothesis contains
 
-Every hypothesis in the investigation, whenever it is written, has the same form:
+- One claim, as a full sentence that could be false. A claim with several parts ("the month was
+  cold and wet and windy") is split into one hypothesis per part.
+- "Refuted if", followed by the result that would refute it. A claim with no such result is not a
+  hypothesis and is dropped.
+- The smallest difference that would change the stakeholder's decision, not only the direction
+  of the difference. "Refuted if the gain does not recover the extra cost within 10 years", not
+  "refuted if the gain is zero or less". A claim about a rank ("the worst in years") is tested by
+  the rank within a named span of years and needs no margin.
+- A number, in the order the hypotheses will be tested, within the question they belong to.
+- Where the hypothesis tests a word of the request, the word and what it requires. "Pays off"
+  requires a gain compared with its cost. "The worst in years" requires a span of years, named.
+  "Could we have told in advance" requires using only what was known before the outcome.
 
-- One claim, as a full sentence that could be false. A claim that bundles several parts gets split,
-  so each has its own verdict.
-- "Refuted if": the result that would refute it. A hypothesis with no such result is dropped.
-- The smallest difference that would change the stakeholder's decision, not only its direction
-  ("refuted if the gain does not recover the extra cost within 10 years", not "refuted if the gain
-  is zero or less"). A claim about a rank ("the worst in years") is tested by the rank in a named
-  window and needs no margin.
-- A number in the order it will be tested, within its question and its series.
-- The words of the request it tests, where it tests one: list each word that carries a claim and
-  what it requires ("pays off" compares a gain with its cost; "the worst in years" names a window;
-  "could we have told in advance" means using only what was known before the outcome).
+## The first set: from the request alone
 
-There are two series, and the difference between them is what the analyst knew when writing.
+Written before the request for data is sent, from the problem statement alone, and never edited
+afterwards. The first set holds:
+- the explanations the stakeholder and the people around them already give ("the polls had small
+  samples");
+- the checks the stakeholder would expect ("was the month unusual at all?");
+- one hypothesis that says something else explains it, stated at the level of the question and
+  not as a mechanism ("neither: something about where the polls were taken explains the error").
 
-**Series A: before any data.** Written from the problem statement alone, before the request runs,
-and never edited afterwards. They are the explanations already on the table: what the stakeholder
-or the people around them say ("the polls had small samples"), the checks the stakeholder would
-expect (was it unusual at all?), and one "something else" claim stated at the level of the question
-("neither: something about where the polls were taken explains the error"). Two to four per
-question is typical. Write them to `hypotheses.md` before the request runs, and insert that file
-into the analysis notebook verbatim; `eda-scripts/scripts/check_order.py` checks the file predates
-the data.
+Two to four per question is usual. Seven means the analyst has written the answer in advance.
 
-**Series B: after looking.** The first look and the data-quality checks show distributions, gaps,
-groups, and ranges that the problem statement could not. Each later finding does the same. A
-question those views raise is written as a series B hypothesis, in the same form, before its
-section runs, with one more line: what prompted it (the view, the table, or the finding). The first
-batch is written in the analysis notebook right after the data-quality section is read, under its
-own heading; later ones open the digging-deeper section that tests them. Series B hypotheses are
-numbered B1, B2, and so on.
+Write them to `hypotheses.md`, then run `check_order.py --stamp` (`eda-scripts`) before any data
+is downloaded. The analysis notebook's hypotheses cell is this file, inserted verbatim. A failed
+hypothesis from the first set stays failed; it is not re-tested with a different measure
+(`eda-test-hypothesis`, The verdict).
 
-The two series serve different purposes. Series A tests what people already believe, and a failed
-series A hypothesis stays failed (`eda-test-hypothesis`, The verdict); a better measure that
-turns up later is a series B hypothesis, not a repair. Series B is the investigation: it carries the
-questions the data itself raised, and it is where most findings come from.
+## The second set: from what the data shows
 
-In a student version only, add a prompt for the student's own prediction before any data. An
-analyst's deliverable leaves it out.
+The first look and the data-quality checks show distributions, gaps, groups, and ranges the
+request did not mention. Each later finding shows more. A question raised by one of those views is
+written as a hypothesis in the form above, plus one line: what prompted it (the table, the chart,
+or the finding, by section number).
 
-*The analyst decides* the hypotheses in both series.
+The first batch is written in the analysis notebook right after the data-quality section has been
+read, under its own heading, before any hypothesis is tested. Later ones open the section that
+tests them. They are numbered B1, B2, and so on, so the reader can tell which hypotheses were
+written before the data and which after.
 
+Example, from the Nashville ice storm case. The first look showed that the hourly file records the
+type of precipitation, and the quality checks showed January 2026 was ordinary on its monthly
+totals:
+
+> **B1. The storm's freezing rain, not its total precipitation, set it apart from other winter
+> storms.** Prompted by section 4 (the hourly file has a precipitation-type column) and section
+> 5.3 (the monthly totals rank 21st of 30). *Refuted if* at least three earlier winters had a
+> freezing-rain episode with as much liquid.
+
+## In a student version only
+
+Add a prompt for the student's own prediction before any data: "My prediction, before looking at
+any data: ... and why". An analyst's deliverable does not include it.
+
+*The analyst decides* the hypotheses in both sets.

@@ -1,82 +1,84 @@
 ---
 name: eda-draw-figure
-description: Draws figures that make their point without the analyst in the room, in an analysis notebook, memo, or report. Owns plot choice, titles, labels, integrity, color, highlight, and matched pairs. Use whenever drawing, fixing, or reviewing a chart, including requests that never say "figure standards" such as "plot this" or "why is this chart confusing".
+description: Draws a chart that makes its point without the analyst present, for an analysis notebook, memo, or report. Use whenever drawing, fixing, or reviewing a chart, including requests such as "plot this" or "why is this chart confusing".
 ---
 
-# Figure standards
+# How a figure is drawn
 
-A figure makes its point without the analyst in the room: a reader gets it within about five
-seconds. Four principles cover most of what that takes: graphical integrity, keep it simple, use
-color sensibly, use the right plot type. The rules below make those concrete and checkable.
+**Inputs.** The data for one chart, and the hypothesis or question the chart serves.
 
-After drawing a figure, look at the rendered image (`eda-scripts/scripts/figures.py` writes every
-figure in a notebook to PNG). Overlapping titles, a legend over the data, unreadable ticks, and
-truncated labels are only visible in the render.
+**Produces.** One figure in a notebook cell, and the markdown after it. A reader should understand
+the figure within about five seconds, because a figure in a memo is read without the analyst in
+the room.
 
-## 1. Choose the plot type from the variables and the question
+After drawing, look at the rendered image. `figures.py` in `eda-scripts` writes every figure in a
+notebook to a PNG. Overlapping titles, a legend over the data, unreadable ticks, and cut-off
+labels show only in the render.
+
+## 1. Choose the plot from the variables and the question
 
 | The question is about | Variables | Plot |
 |---|---|---|
 | change over time | one numeric over a time axis | line |
-| the distribution of one variable | one numeric | histogram (box plot to compare several) |
-| one summary per group | categorical + one statistic | bar |
-| distributions across groups | categorical + numeric | box plot, or overlaid histograms |
-| how two numeric variables move together | two numeric | scatter, with a regression line when you fit one |
-| a matrix of values | two categorical or two binned numeric + a value | heatmap |
-| many numeric variables at once | many numeric | correlation heatmap, pair plot, or a reduction (principal components) |
+| the distribution of one variable | one numeric | histogram; box plots to compare several |
+| one summary per group | categorical and one statistic | bar |
+| distributions across groups | categorical and numeric | box plots, or overlaid histograms |
+| how two numeric variables move together | two numeric | scatter, with a regression line when one is fitted |
+| a matrix of values | two categorical, or two binned numeric, and a value | heatmap |
+| many numeric variables at once | many numeric | correlation heatmap, pair plot, or principal components |
 
-- For a numeric predictor, show every observation, not only grouped summaries: a scatter of each
-  case with its regression line. Grouped bars may sit beside it, but they hide the cases.
-- When comparing one case (a year, a state) against the others, draw them all and highlight the
+- For a numeric predictor, draw every observation: a scatter of each case with its regression
+  line. Grouped bars may sit beside it, but on their own they hide the cases.
+- When one case (a year, a state) is compared with the others, draw them all and highlight the
   one being asked about.
-- Matched pairs: when two variables are in play and one is shown in a given form, show the other
-  in the same form, adjacent.
+- Matched pairs: when two variables are in play and one is drawn in a given form, draw the other
+  in the same form, immediately after it. The reader compares them by eye.
 
 ## 2. Make it readable without you
 
-- A title on every figure, naming what it shows. During exploration the title names the subject
-  ("2020 polls: average error by sample size"); in a memo or report figure it states the finding
-  ("Large and small polls missed by the same amount").
-- Axis labels in plain language with the unit and, for signed quantities, the direction ("Average
-  error (points; above 0 = overstated Biden)"); never a variable name (`eda-write-prose`).
-- Real tick values: group bars carry their actual ranges ("138 to 637"), not "small" and "large";
-  every bar labelled; log axes show plain numbers (1,000 and 10,000, not 10^3).
-- Reference lines are labelled: a threshold the question names, zero, the result, the average.
-- The numbers that matter go on the figure: a regression's slope and r in the title's second line;
-  an average's value in its legend label.
-- Dollar signs: matplotlib reads text between two `$` signs as a formula. Write `\$` or "dollars".
+- A title on every figure that names what it shows. During exploration the title names the
+  subject: "2020 polls: average error by sample size". In a memo or report the title states the
+  finding: "Large and small polls missed by the same amount".
+- Axis labels in plain words with the unit and, for a signed quantity, the direction: "Average
+  error (points; above 0 = overstated Biden)". A column name on an axis is a breach.
+- Real tick values: grouped bars carry their actual ranges ("138 to 637"), not "small" and
+  "large"; every bar labelled; a log axis shows plain numbers (1,000 and 10,000, not 10^3).
+- Reference lines labelled: a threshold the question names, zero, the result, the average.
+- The numbers that matter on the figure: a regression's slope and r in the title's second line;
+  an average's value in its legend label; a count of cases in the title or the table beside it.
+- Dollar signs: matplotlib reads text between two `$` signs as a formula. Write `\$` or
+  "dollars".
 - Nothing overlaps: titles across subplots, a legend over the data, labels over points. Stack
-  subplots vertically when titles are long; add headroom (`ax.set_ylim(top=...)`) for a legend.
+  subplots vertically when titles are long; add headroom for a legend with `ax.set_ylim(top=...)`.
 
 ## 3. Integrity
 
-- Bar charts start at zero. For a quantity whose zero means nothing (a temperature in degrees F, a
-  year), do not use bars: use a dot plot or a line, or bars of the difference from a labelled
-  baseline.
-- Same axes when two panels are meant to be compared.
-- Do not smooth, bin, or aggregate away the thing the question is about; say in the markdown what
-  the simplification dropped.
-- Point counts and sample sizes are visible somewhere (title, legend, or the table beside it).
+- Bar charts start at zero; a truncated bar axis exaggerates differences. For a quantity whose
+  zero means nothing (a temperature in degrees F, a year), do not use bars: use a dot plot, a
+  line, or bars of the difference from a labelled baseline.
+- Panels meant to be compared share their axes.
+- Do not smooth, bin, or aggregate away the thing the question is about. Say in the markdown
+  what a simplification dropped.
 
 ## 4. Color
 
-- Choose by what the data is doing: qualitative (categories), sequential (low to high), diverging
-  (above and below a midpoint), highlight (one case against the rest).
-- Highlight: one strong color (for example firebrick) for the case asked about, silver or grey for
-  the rest; the figure says what the highlight means. Keep the same color meaning everywhere in
-  the notebook.
+- Choose by what the data is doing: qualitative for categories; sequential for low to high;
+  diverging for above and below a midpoint; a highlight for one case against the rest.
+- Highlight: one strong color (firebrick, for example) for the case asked about, silver or grey
+  for the rest, and the figure says what the highlight means. The same color keeps the same
+  meaning throughout the notebook.
 - Colorblind-safe palettes for categories; never red against green as the only distinction.
-- Set colors where the plot is drawn, not as module-level constants.
+- Set colors where the plot is drawn, not as module-level constants (`eda-write-notebook`).
 
 ## 5. Describe it
 
-In the markdown after the figure, the reader can complete the five-step figure description: the
-topic, what the y-axis shows, what the x-axis shows, what each point, line, or bar therefore
-represents, and the takeaway. If any step is unclear from the figure, fix the figure. The takeaway
-belongs in "What we found", stated with its number.
+In the markdown after the figure, the reader can answer five things from the figure alone: the
+topic; what the y-axis shows; what the x-axis shows; what each point, line, or bar therefore
+represents; and the takeaway. If any of the five is unclear from the figure, fix the figure. The
+takeaway goes in "What we found", with its number.
 
 ## Reference
 
 - `references/examples.md`: three figures that meet every rule and three that break at least one,
-  with images and a rule-by-rule check. All six are from one case (the 2020 polls); they show the
-  rules, they do not extend them.
+  with images and a rule-by-rule check. All six are from the 2020 polls case. Read it when a
+  figure is being reviewed.

@@ -1,9 +1,8 @@
 # Setup notebook skeleton
 
 Section headings and the job of each section's markdown. Replace the bracketed parts. Every section
-that runs a check ends with a "**What we found.**" cell. The opening cell states what the notebook
-holds; it does not narrate what the notebook is about to do (`eda-write-prose`, No framing
-sentences).
+that runs a check ends with a "**What we found.**" cell. The opening cell lists the files the notebook
+writes; it does not announce what the notebook is about to do (`eda-write-prose`).
 
 ```
 # Step 0: Getting the Data
@@ -33,8 +32,8 @@ unknown about how it was collected.]
 
 ---
 ## 3. The request
-[What is requested and why only that; units requested and why; the size estimate from the test
-request.]
+[Which columns, entities, and years are requested and why only those; units requested and why;
+the estimate of requests and time from the test request.]
 
 [code: fetch each piece, save raw, rename, convert units, derive simple fields; the fetch
 helper's table of pieces, rows, first and last date, status]
@@ -84,7 +83,7 @@ head]
 > what the value is (`result_margin_pts`, not `margin_actual`); codes turned into words (`US`
 > becomes `National`, `M2` becomes `ME-2`).
 
-## Example series B hypotheses (Nashville ice storm case)
+## Example second-set hypotheses (Nashville ice storm case)
 
 Written after the first look and the data-quality checks, which showed that the hourly record
 carries a precipitation type and that January 2026 was ordinary on the monthly measures:

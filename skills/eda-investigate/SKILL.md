@@ -1,123 +1,99 @@
 ---
 name: eda-investigate
-description: Runs an exploratory data analysis (EDA) from a stakeholder's problem to finished Jupyter notebooks, calling the other EDA skills at each stage and handing judgment calls back to the analyst. Use when someone brings a problem, question, or dataset to investigate in a notebook.
+description: Runs an exploratory data analysis from a stakeholder's request to two finished Jupyter notebooks and a memo, calling the other eda- skills at each stage. Use when someone brings a problem or question to investigate with data.
 ---
 
-# EDA workflow
+# The investigation from request to memo
 
-This skill owns the arc of the investigation: the stages, which skill runs each one, the
-deliverables, and how decisions are handed back. Each rule in the suite lives in one skill; this
-file points to the owner rather than restating the rule.
+**Inputs.** A stakeholder's request (an email, a message, a question) and, sometimes, a data
+source the stakeholder names. Nothing else exists at the start: no data, no notebooks.
 
-## The process
+**Produces.** A project folder holding:
+- `<case>-step0-get-the-data.ipynb`, the setup notebook: finds the source, downloads the data,
+  renames columns, inspects the data, runs the quality checks, and saves clean files to `data/`.
+- `<case>-analysis.ipynb`, the analysis notebook: the brief, the hypotheses, one section per
+  test, the model sections, the synthesis, the limits, the memo, and the recap table.
+- `hypotheses.md` (the first hypotheses, written before any data), `decisions.md` (every judgment
+  call), `verification.md` (the verification report), and `data/` (raw downloads unchanged in
+  `data/raw/`, clean files, `PROVENANCE.md`).
 
-The data science workflow (Zumel and Mount) runs define the goal, collect and manage, build the
-model, evaluate and critique, present and document, deploy, and it loops ("loops within loops").
-EDA runs across collect-and-manage, build, and evaluate: it organizes the data, spots problems, and
-identifies which modelling strategies are available.
+The other skills hold the rules for each stage. This file holds the order of the stages, what the
+analyst decides at each, and the rules that belong to no single stage.
 
-Inside the loop, every move applies Tukey's two principles: simplify on purpose (and notice what
-the simplification drops), then look one layer deeper ("the mean is 47; what is the
-distribution?"). The investigation is a chain of questions. Each look at the data produces the
-next question, and a question worth the reader's time is written as a hypothesis with its
-refutation before it is tested (`eda-write-hypotheses`, Hypotheses). Clustering, regression, and
-classification are lenses inside the loop (`eda-model`), and a model is the end of the analysis
-only when building it was the goal.
-
-## Stages and skills
+## The stages, in order
 
 | Stage | Skill | The analyst decides |
 |---|---|---|
-| 1a. Problem to brief, questions, and the first hypotheses (series A), written before any data is pulled | `eda-write-hypotheses` | the questions, the hypotheses, the size of difference that matters |
-| 1b. Find, size, and pull the data once; first look | `eda-get-data`, `eda-scripts` (fetch) | the source, the window, the unit of analysis |
-| 2. Data quality: what a row is, missing values, values and units, coverage, preprocessing | `eda-check-data` | what each problem means and what to do about it |
-| 2b. Hypotheses from the first look (series B): what the univariate views and the quality checks suggest, written as hypotheses with refutations before they are tested | `eda-write-hypotheses` | which of them to test and in what order |
-| 3. Test each hypothesis as worded; after each verdict, the next question, as a series B hypothesis | `eda-test-hypothesis` | whether the test matches the claim; the verdict; the next hypothesis |
-| 4. Models as lenses | `eda-model` | the target and features; k; whether groups mean anything; which surfaced cases to chase |
-| 5. Synthesis, limits, memo | `eda-write-prose` | the interpretation, the recommendation |
-| 6. Verify | `eda-verify`, `eda-scripts` | sign-off |
+| 1. Write the brief and the first hypotheses from the request alone, before any data exists | `eda-write-hypotheses` | the questions; the hypotheses; the smallest difference that matters |
+| 2. Find the source, download the data once, rename, inspect | `eda-get-data` | the source; the years or entities to request; the unit of analysis |
+| 3. Run the data-quality checks and the preprocessing | `eda-check-data` | what each problem means and what to do about it |
+| 4. Write the second set of hypotheses from what stages 2 and 3 showed | `eda-write-hypotheses` | which to test, in what order |
+| 5. Test each hypothesis as worded; after each verdict, write the next hypothesis | `eda-test-hypothesis` | whether the test matches the claim; the verdict; the next hypothesis |
+| 6. Fit a model where a hypothesis calls for one, and read what it surfaces | `eda-model` | the target and features; the number of clusters; which surfaced cases to examine |
+| 7. Write the synthesis, the limits, the memo, and the recap | `eda-write-prose` | the interpretation; the recommendation |
+| 8. Verify everything against the data | `eda-verify` | sign-off |
 
-`eda-write-notebook`, `eda-draw-figure`, and `eda-write-prose` apply to every cell
-at every stage. Read them once, before the first cell, and keep them open.
-
-## Deliverables
-
-Two notebooks in the project folder, plus the data and three small files:
-
-1. `<case>-step0-get-the-data.ipynb`: where the data comes from; naming conventions; the request,
-   each piece fetched once and checked; first look; data quality (every check from
-   `eda-check-data`); checks against facts already known; save and provenance; the numbers the
-   brief quotes. Writes `data/` (raw downloads unchanged in `data/raw/`, cleaned files,
-   `PROVENANCE.md`).
-2. `<case>-analysis.ipynb`: brief; setup cell; series A hypotheses (inserted verbatim from
-   `hypotheses.md`); series B hypotheses from the first look; one section per hypothesis test, in
-   numbered order; "Something else?"; digging-deeper sections, each testing a series B hypothesis;
-   lens sections; synthesis; limits; the memo; a recap table (question, hypothesis, what the data
-   showed).
-3. `hypotheses.md` (series A, written before the request runs; `eda-scripts/scripts/check_order.py`
-   checks that it predates the data), `decisions.md` (every analyst decision, see below), and
-   `verification.md` (`eda-verify`).
+Three skills apply to every cell at every stage: `eda-write-notebook` (how a notebook is built),
+`eda-draw-figure` (how a figure is drawn), and `eda-write-prose` (how text about data is written).
+Read them before the first cell. `eda-scripts` holds the scripts the stages run.
 
 ## Handing decisions back
 
 At every point a skill marks "the analyst decides":
-- Working with a person: stop and ask, with the options and what each would change. Ask only real
-  decisions; never offer an option that contradicts what the person already said.
-- Running unattended: make the choice a careful analyst would make, write it in the notebook where
-  it applies as a short "**Analyst decision.**" paragraph (what was decided, the alternative, why),
-  and add it to `decisions.md`. Never hide a decision in code.
+- With a person present: stop and ask. Give the options and what each would change. Ask only
+  decisions the conversation has not already settled.
+- With no person present: make the choice a careful analyst would make. Write it in the notebook
+  where it applies as a paragraph labelled "**Analyst decision.**" (what was decided, the
+  alternative, why), and add it to `decisions.md`. A decision made inside code and not written
+  down is a breach.
 
-## The notebook is where the investigation happens
+## Do the analysis in the notebook
 
-Do the exploring in the notebooks, in order, one section at a time: write the section's opening
-markdown and code, run it, read the output, then write its "What we found" from that output. Do
-not work the analysis out in side scripts or a scratch session and transcribe the conclusions
-afterwards, and never write a finding, or a placeholder number, before the output it cites exists.
-A notebook assembled afterwards reads like an investigation without having been one. Small checks
-on how a file is formatted, before the request is written, are fine; anything that looks at the
-values the questions are about belongs in a notebook section. (`eda-verify` re-derives numbers in
-a separate script on purpose; that is a check on the notebook, not a place to do the analysis.)
+Build each section in order: write its opening markdown and code, run the code, read the output,
+then write "What we found" from that output. Do not compute results in a side script or a
+scratch session and copy the conclusions into the notebook afterwards. Do not write a finding, or
+a placeholder number, before the output it cites exists. A check on how a file is formatted,
+before the request is written, may run outside the notebook; a look at the values the questions
+are about may not. The re-derivation in `eda-verify` runs in a separate script on purpose: it
+checks the notebook after the fact.
 
-## "Something else?"
+## The section with no hypothesis
 
-After the series A hypotheses are tested, one section looks at the case itself with no hypothesis:
-the same measures at a finer grain (the event's days instead of the month; one state instead of
-the nation), and the case's rank on a few measures nobody named. It lists what stands out, adds the
-open series B hypotheses, and ends with the candidate list and the one chosen. Each later
-digging-deeper section starts from one of them, written as a hypothesis.
+After the first hypotheses (stage 5) are tested, one section examines the case itself: the same
+measures at a finer level of detail (the event's days instead of the month; one state instead of
+the nation), and the case's rank on a few measures nobody named. It lists what stands out, adds
+the second-set hypotheses not yet tested, and ends with the list of candidates and the one chosen.
+Each later section starts from one candidate, written as a hypothesis (`eda-write-hypotheses`).
 
 ## Where derived tables are built
 
-A derived table the series A hypotheses define before any data (one row per event, per state, per
-institution) is built in the setup notebook's preprocessing and saved. A table a later hypothesis
-calls for is built in the analysis section that needs it.
+A table the first hypotheses already define (one row per event, per state, per institution) is
+built and saved in the setup notebook's preprocessing section. A table a later hypothesis needs is
+built in the analysis section that tests it.
 
-## Going back to the setup notebook
+## Going back for more data
 
-When the analysis needs a column, a period, or a check the setup notebook does not have, go back:
-add it to the setup notebook in the section where it belongs, fetch only the addition
-(`eda-scripts` fetch skips pieces already on disk), re-run the setup notebook, then re-run the
-analysis notebook from the top. Record the loop in `decisions.md` (what was added and which
-finding sent you back) and mention it in the analysis section that needed it.
+When a test needs a column, a period, or a check the setup notebook lacks: add it to the setup
+notebook in the section where it belongs, download only the addition, re-run the setup notebook,
+then re-run the analysis notebook from the top. Record in `decisions.md` what was added and which
+finding needed it, and say so in the analysis section that needed it.
 
-## Where the next question comes from
+## Where the next hypothesis comes from
 
-After each finding, list candidate next questions and pick one (or ask). The standard moves:
-- Is that unusual? Compared with what, over the same window?
-- The maximum (or the minimum) instead of the total.
-- When did it happen within the period? (day, then hour)
-- What was the other variable doing at the same time? (matched pairs in the same form,
-  `eda-draw-figure`)
+After each finding, list candidate next questions and choose one. The usual sources:
+- Is the value unusual? Compared with what, over the same period?
+- The maximum or the minimum instead of the total.
+- When within the period did it happen? The day, then the hour.
+- What was the other variable doing at the same time? Draw both in the same form, side by side
+  (`eda-draw-figure`, Matched pairs).
 - How long did it last? What accumulated?
-- Up for whom? Does the aggregate hide subgroups that differ?
-- Does the pattern also appear where the event did not happen? (before calling it the cause)
-- What does the model's residual, cluster, or miss point at? (`eda-model`)
+- Does the total hide subgroups that differ?
+- Does the same pattern appear where the event did not happen?
+- What do the model's residuals, clusters, or misclassified cases point at? (`eda-model`)
 
-The chosen question becomes the next series B hypothesis, with its refutation, before its section
-runs.
+The chosen question is written as a hypothesis, with its refutation, before its section runs.
 
 ## Finish
 
-Run `eda-verify`. Both notebooks must report 0 errors from `eda-scripts/scripts/nb_lint.py --trace`,
-`check_order.py` must pass, and every figure must have been looked at
-(`eda-scripts/scripts/figures.py`).
+Run `eda-verify`. Both notebooks report 0 errors from `nb_lint.py --trace`, `check_order.py`
+passes, and every figure has been opened and looked at (`eda-scripts`).
