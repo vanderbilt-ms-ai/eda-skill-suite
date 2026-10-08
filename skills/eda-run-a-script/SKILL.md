@@ -1,5 +1,5 @@
 ---
-name: eda-tools
+name: eda-run-a-script
 description: The scripts the EDA skills call: the notebook lint and number trace, the cached and checked download helper, the figure extractor, and the hypotheses-before-data check. Use whenever another EDA skill names a script, or when a notebook needs to fetch data, be linted, or have its figures viewed.
 ---
 
@@ -9,7 +9,7 @@ Every script the suite uses lives here, once. The other skills name the script; 
 what it does and how to run it. All scripts need Python 3 and `pandas`; the lint also needs
 `nbformat` installed so notebooks execute.
 
-Find this folder with `ls ~/.claude/skills/eda-tools/scripts` or `ls .claude/skills/eda-tools/scripts`
+Find this folder with `ls ~/.claude/skills/eda-run-a-script/scripts` or `ls .claude/skills/eda-run-a-script/scripts`
 (whichever the install used), and run the scripts from there. Only `fetch.py` is copied into the
 project, because the notebook imports it.
 

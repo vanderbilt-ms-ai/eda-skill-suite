@@ -76,7 +76,7 @@ def fetch(url, dest, check=None, params=None, retries=3, timeout=120, pause=2.0,
         return Result(dest, "on disk", "")
     if params:
         url = url + ("&" if "?" in url else "?") + urllib.parse.urlencode(params)
-    request = urllib.request.Request(url, headers=headers or {"User-Agent": "eda-tools fetch"})
+    request = urllib.request.Request(url, headers=headers or {"User-Agent": "eda-run-a-script fetch"})
     reason = ""
     for attempt in range(retries):
         if attempt:

@@ -1,5 +1,5 @@
 ---
-name: eda-lens
+name: eda-apply-a-lens
 description: Uses regression, clustering, and classification in the middle of an analysis to find what to investigate next. Use whenever an analysis calls for a model.
 ---
 
@@ -7,8 +7,8 @@ description: Uses regression, clustering, and classification in the middle of an
 
 In exploration a model is a way of looking one layer deeper, not the end of the analysis. Fit it,
 check it is sound, then read what it surfaces: those cases are the next hypotheses. Each lens
-section has the three parts every section has (`eda-notebook-standards`, Structure) and ends with
-"**Next hypotheses.**" (`eda-notebook-setup`, Hypotheses, series B).
+section has the three parts every section has (`eda-write-the-notebook`, Structure) and ends with
+"**Next hypotheses.**" (`eda-write-hypotheses`, Hypotheses, series B).
 
 ## Before any model
 
@@ -16,10 +16,10 @@ section has the three parts every section has (`eda-notebook-standards`, Structu
   summaries could not.
 - Choose the variables from the question, not from whatever columns exist. Say what each measures
   and why it belongs.
-- Check the rows the model will use against the missingness findings (`eda-data-quality`, Missing
+- Check the rows the model will use against the missingness findings (`eda-check-the-data`, Missing
   values, item 7). If the complete rows differ from the rest, the model describes only them. Say
   so.
-- Statistics are defined at first use (`eda-writing-standards`); the ones this skill needs are
+- Statistics are defined at first use (`eda-write-about-data`); the ones this skill needs are
   slope, intercept, r, R-squared, silhouette, inertia, accuracy, precision, and recall.
 
 ## Regression
@@ -33,7 +33,7 @@ section has the three parts every section has (`eda-notebook-standards`, Structu
   Next hypothesis: what the cases that beat the prediction share.
 - Compare blocks of variables by R-squared to see which explains more.
 - Check the pattern where the event did not happen before calling it a cause; the wording rule is
-  in `eda-writing-standards` (Words that match the data).
+  in `eda-write-about-data` (Words that match the data).
 
 ## Clustering
 

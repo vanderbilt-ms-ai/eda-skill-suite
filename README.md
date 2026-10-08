@@ -1,6 +1,6 @@
 # EDA skill suite
 
-Ten Claude skills for exploratory data analysis (EDA) in Jupyter notebooks. They carry an analyst's
+Eleven Claude skills for exploratory data analysis (EDA) in Jupyter notebooks. They carry an analyst's
 process from a stakeholder's problem to a finished pair of notebooks: one that gets and checks the
 data, and one that tests hypotheses, writes new ones from what the data shows, and ends in a memo.
 The skills do the mechanics and hand every judgment call back to the analyst.
@@ -31,16 +31,17 @@ rule is changed in one place.
 
 | Skill | Owns |
 |---|---|
-| `eda-workflow` | the stages and their order; the deliverables; handing decisions back ("Analyst decision."); doing the analysis in the notebook; "Something else?"; looping back; where the next question comes from |
-| `eda-notebook-setup` | the brief; the hypothesis form and the two series (A before data, B after looking); the data source; the request; the first look; checks against known facts; provenance |
-| `eda-data-quality` | every quality check, including missing values and gaps in a series; the data-quality budget; preprocessing |
-| `eda-analysis-selection` | reading a claim; the analysis for each kind of claim; the verdict rules (as worded, the size that matters, a failed hypothesis stays failed); the next hypothesis |
-| `eda-lens` | regression, clustering, and classification as lenses; leakage; the lens section's extra parts |
-| `eda-verify` | the verification steps and the verification report |
-| `eda-notebook-standards` | section structure and the three parts of a section; cells show and markdown interprets; column naming; notebook size; code rules; runs top to bottom |
-| `eda-figure-standards` | plot choice; titles, labels, ticks, reference lines; integrity; color and the highlight; matched pairs; the five-step description |
-| `eda-writing-standards` | every prose rule: plain statements, no aphorisms, idioms, figurative language, framing sentences, or fragments; observation before question; describe, interpret, conclude; words that match the data; length; emphasis; plain ASCII |
-| `eda-tools` | the scripts: `nb_lint.py`, `fetch.py`, `figures.py`, `check_order.py` |
+| `eda-investigate` | the stages and their order; the deliverables; handing decisions back ("Analyst decision."); doing the analysis in the notebook; "Something else?"; looping back; where the next question comes from |
+| `eda-write-hypotheses` | the brief; the hypothesis form and the two series (A before data, B after looking) |
+| `eda-get-the-data` | the data source; the request; the first look; checks against known facts; provenance |
+| `eda-check-the-data` | every quality check, including missing values and gaps in a series; the data-quality budget; preprocessing |
+| `eda-test-a-hypothesis` | reading a claim; the analysis for each kind of claim; the verdict rules (as worded, the size that matters, a failed hypothesis stays failed); the next hypothesis |
+| `eda-apply-a-lens` | regression, clustering, and classification as lenses; leakage; the lens section's extra parts |
+| `eda-verify-the-analysis` | the verification steps and the verification report |
+| `eda-write-the-notebook` | section structure and the three parts of a section; cells show and markdown interprets; column naming; notebook size; code rules; runs top to bottom |
+| `eda-draw-a-figure` | plot choice; titles, labels, ticks, reference lines; integrity; color and the highlight; matched pairs; the five-step description |
+| `eda-write-about-data` | every prose rule: plain statements, no aphorisms, idioms, figurative language, framing sentences, or fragments; observation before question; describe, interpret, conclude; words that match the data; length; emphasis; plain ASCII |
+| `eda-run-a-script` | the scripts: `nb_lint.py`, `fetch.py`, `figures.py`, `check_order.py` |
 
 ## Installing
 
@@ -49,9 +50,9 @@ Paste this prompt into Claude Code:
 ```text
 Install the EDA skill suite from https://github.com/vanderbilt-ms-ai/eda-skill-suite. Clone the
 repository into a temporary folder, copy every folder under its skills/ directory into
-~/.claude/skills/ (replace any older copies, including the old notebook-standards,
-figure-standards, and writing-standards folders), then delete the temporary folder. Make sure the
-Python packages pandas and nbformat are installed. Finish by listing the ten installed skills.
+~/.claude/skills/ (replace any older copies, including every older eda- folder and the old
+notebook-standards, figure-standards, and writing-standards folders), then delete the temporary folder. Make sure the
+Python packages pandas and nbformat are installed. Finish by listing the eleven installed skills.
 ```
 
 - One project only: in that project, ask for the skills to go into `.claude/skills/` instead.
@@ -69,12 +70,12 @@ Here's an email from my director: "[the email]". I'm the data analyst. Help me i
 a Jupyter notebook using [the data source].
 ```
 
-Claude loads `eda-workflow`, which brings in the other skills at each stage and stops to ask at
+Claude loads `eda-investigate`, which brings in the other skills at each stage and stops to ask at
 each decision that belongs to the analyst.
 
 ## The tools
 
-All scripts are in `skills/eda-tools/scripts/` and need Python 3 and `pandas`:
+All scripts are in `skills/eda-run-a-script/scripts/` and need Python 3 and `pandas`:
 
 | Script | What it does |
 |---|---|
@@ -88,7 +89,7 @@ All scripts are in `skills/eda-tools/scripts/` and need Python 3 and `pandas`:
 Before this version, each test gave an agent only a stakeholder's problem and no data, and checked
 the two notebooks it produced against a finished case study: three complete runs on the ice storm
 (NOAA weather records), two on College Scorecard, and one plain Claude Code session with the skills
-installed and a student-style prompt, which loaded `eda-workflow` on its own and produced two
+installed and a student-style prompt, which loaded `eda-investigate` on its own and produced two
 notebooks that passed the lint. Each round's failures became rules.
 
 This version restructured the suite (one owner per rule, the tools skill, series B hypotheses, the
