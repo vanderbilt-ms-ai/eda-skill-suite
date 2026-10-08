@@ -20,8 +20,8 @@ cannot apply to this data gets one line, "**Does not apply:** [why]". Related ch
 nothing share one table. The whole section runs about 20 to 30 cells.
 
 Each check examines one variable, or how the data was recorded. A comparison that tests a
-hypothesis belongs in the analysis notebook. What these views suggest is written down
-afterwards as the second set of hypotheses (`eda-write-hypotheses`).
+hypothesis belongs in the analysis notebook. Afterwards the analyst writes what these views
+suggest as the second set of hypotheses (form in `eda-hypothesis`).
 
 ## 1. What a row is
 

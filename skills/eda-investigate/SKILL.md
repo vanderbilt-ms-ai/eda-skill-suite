@@ -24,11 +24,11 @@ analyst decides at each, and the rules that belong to no single stage.
 
 | Stage | Skill | The analyst decides |
 |---|---|---|
-| 1. Write the brief and the first hypotheses from the request alone, before any data exists | `eda-write-hypotheses` | the questions; the hypotheses; the smallest difference that matters |
+| 1. The analyst writes the brief and the first hypotheses from the request alone, before any data exists; record them in `hypotheses.md` and stamp it | the analyst; `eda-hypothesis` if they ask for help | the questions; the hypotheses; the smallest difference that matters |
 | 2. Find the source, download the data once, rename, inspect | `eda-get-data` | the source; the years or entities to request; the unit of analysis |
 | 3. Run the data-quality checks and the preprocessing | `eda-check-data` | what each problem means and what to do about it |
-| 4. Write the second set of hypotheses from what stages 2 and 3 showed | `eda-write-hypotheses` | which to test, in what order |
-| 5. Test each hypothesis as worded; after each verdict, write the next hypothesis | `eda-test-hypothesis` | whether the test matches the claim; the verdict; the next hypothesis |
+| 4. The analyst writes the second set of hypotheses from what stages 2 and 3 showed, under "## Second hypotheses (from the data)" | the analyst; `eda-hypothesis` if they ask for help | which to test, in what order |
+| 5. Test each hypothesis as worded; after each verdict, the analyst writes the next hypothesis | `eda-test-hypothesis` | whether the test matches the claim; the verdict; the next hypothesis |
 | 6. Fit a model where a hypothesis calls for one, and read what it surfaces | `eda-model` | the target and features; the number of clusters; which surfaced cases to examine |
 | 7. Write the synthesis, the limits, the memo, and the recap | `eda-write-prose` | the interpretation; the recommendation |
 | 8. Verify everything against the data | `eda-verify` | sign-off |
@@ -47,10 +47,12 @@ Load all three before the first cell. `eda-scripts` holds the scripts the stages
 At every point a skill marks "the analyst decides":
 - With a person present: stop and ask. Give the options and what each would change. Ask only
   decisions the conversation has not already settled.
-- With no person present: make the choice a careful analyst would make. Write it in the notebook
-  where it applies as a paragraph labelled "**Analyst decision.**" (what was decided, the
-  alternative, why), and add it to `decisions.md`. A decision made inside code and not written
-  down is a breach.
+- When the analyst answers, write the decision in the notebook where it applies as a paragraph
+  labelled "**Analyst decision.**" (what was decided, the alternative, why), and add it to
+  `decisions.md`. A decision made inside code and not written down is a breach.
+- When no one answers, stop and list what is needed. Do not make the analyst's decisions; a
+  notebook whose hypotheses and choices the analyst did not make is not theirs to defend. (Test
+  harnesses supply a stand-in analyst; that is the harness's job, not a rule here.)
 
 ## Do the analysis in the notebook
 
@@ -68,7 +70,7 @@ After the first hypotheses (stage 5) are tested, one section examines the case i
 measures at a finer level of detail (the event's days instead of the month; one state instead of
 the nation), and the case's rank on a few measures nobody named. It lists what stands out, adds
 the second-set hypotheses not yet tested, and ends with the list of candidates and the one chosen.
-Each later section starts from one candidate, written as a hypothesis (`eda-write-hypotheses`).
+The analyst writes the chosen candidate as a hypothesis (form in `eda-hypothesis`), and the next section starts from it.
 
 ## Where derived tables are built
 
@@ -96,7 +98,8 @@ After each finding, list candidate next questions and choose one. The usual sour
 - Does the same pattern appear where the event did not happen?
 - What do the model's residuals, clusters, or misclassified cases point at? (`eda-model`)
 
-The chosen question is written as a hypothesis, with its refutation, before its section runs.
+Put the candidates to the analyst. The analyst chooses one and writes it as a hypothesis (form in
+`eda-hypothesis`) before its section runs.
 
 ## Finish
 

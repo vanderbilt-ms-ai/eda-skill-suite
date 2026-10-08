@@ -81,7 +81,7 @@ A memo or report leads with the conclusion, then the evidence, then the method.
 ## Length
 
 - The opening markdown of a section: three to six sentences. A "What we found": two to five. A
-  hypothesis: at most 80 words (`eda-write-hypotheses`). A memo: one page.
+  hypothesis: under 80 words (`eda-hypothesis`). A memo: one page.
 - No markdown cell over about 200 words; the lint warns. A longer cell holds two ideas, so split
   it, or it narrates, so cut it.
 

@@ -5,7 +5,8 @@ description: Builds the setup notebook that finds a data source, downloads each 
 
 # The setup notebook: finding and downloading the data
 
-**Inputs.** `hypotheses.md` (the brief and the first hypotheses, from `eda-write-hypotheses`) and,
+**Inputs.** `hypotheses.md` (the analyst's brief and first hypotheses, in the form `eda-hypothesis`
+sets) and,
 if the stakeholder named one, a data source.
 
 **Produces.** `<case>-step0-get-the-data.ipynb` with sections 1 to 4 below, then the sections
@@ -62,8 +63,8 @@ State the unit of analysis, the time span, the entities covered, and anything su
 
 ## 5. Data quality
 
-`eda-check-data` adds its sections here. When they are done, the second set of hypotheses is
-written (`eda-write-hypotheses`) before any hypothesis is tested.
+`eda-check-data` adds its sections here. When they are done, the analyst writes the second set of
+hypotheses (form in `eda-hypothesis`) before any hypothesis is tested.
 
 ## 6. Checks against facts already known
 

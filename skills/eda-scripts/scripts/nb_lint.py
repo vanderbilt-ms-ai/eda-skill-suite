@@ -18,7 +18,7 @@ What it can check automatically (everything else in the standards needs reading)
               and markdown cells over 200 words (WARN)
   hypotheses - a "Hypothesis ...", "Digging deeper ...", or "Lens ..." section whose opening
               markdown has no "Refuted if" (ERROR); a notebook with "## First hypotheses" and no
-              "## Second hypotheses" section (ERROR); a hypothesis over 80 words (ERROR)
+              "## Second hypotheses" section (ERROR); a hypothesis of 80 words or more (ERROR)
   --trace   - numbers quoted in the markdown that no output shows:
               "What we found" cells     against the outputs above them (also inside a synthesis)
               other cells under a Synthesis, Memo, or Recap heading
@@ -57,7 +57,7 @@ REVERSAL = re.compile(r"(?i)\bnot\b[^.!?\n]{2,60}?\s-\s(?:but|until|yet|it'?s)\b
 BEYOND_RECORD = re.compile(r"(?i)\bfell as\b|\bset a record\b|\ba record\b(?! of)|\brecord-breaking\b|"
                            r"\bdid not happen\b|\bcaused?\b|\bbecause of\b|\bled to\b|\bdue to\b")
 WALL_OF_TEXT = 200   # words in one markdown cell, tables excluded
-HYPOTHESIS_WORDS = 80   # words in one hypothesis, claim and refutation included
+HYPOTHESIS_WORDS = 80   # a hypothesis is under this many words, label to last word
 # Where one hypothesis starts: "**H1.", "**B2.", "**Hypothesis 3", "1. **", "### H1"
 HYPOTHESIS_START = re.compile(r"^(?:#{2,4}\s+)?(?:\d+\.\s+\*\*|(?:\d+\.\s+)?\**\s*(?:H|B|Hypothesis\s*)\d+[.:)])", re.M)
 BAR_CALL = re.compile(r"\.bar\(|\.barh\(|kind\s*=\s*[\"']barh?[\"']|\.plot\.barh?\(")
@@ -272,8 +272,8 @@ def lint(path, trace=False):
                     chunk = text[a:b]
                     chunk = re.split(r"\n(?:---|\*[^*\n]+\*\s*$|#{1,3}\s)", chunk)[0]   # stop at a rule, a note, a heading
                     n = len(chunk.split())
-                    if n > HYPOTHESIS_WORDS:
-                        report("ERROR", i, f"hypotheses: one hypothesis of {n} words (limit {HYPOTHESIS_WORDS})",
+                    if n >= HYPOTHESIS_WORDS:
+                        report("ERROR", i, f"hypotheses: one hypothesis of {n} words (must be under {HYPOTHESIS_WORDS})",
                                chunk.strip()[:60].replace("\n", " "))
             if words > WALL_OF_TEXT and not is_hypotheses_cell:
                 report("WARN", i, f"writing: markdown cell of {words} words (over {WALL_OF_TEXT}); split or cut")

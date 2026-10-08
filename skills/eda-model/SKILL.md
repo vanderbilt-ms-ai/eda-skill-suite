@@ -1,6 +1,6 @@
 ---
 name: eda-model
-description: Fits a regression, a clustering, or a classifier in the middle of an analysis and reads what it surfaces as the next hypotheses. Use whenever a hypothesis calls for a model.
+description: Fits a regression, a clustering, or a classifier in the middle of an analysis and lists the cases it surfaces, for the analyst's next hypotheses. Use whenever a hypothesis calls for a model.
 ---
 
 # Fitting a model in the middle of the analysis
@@ -31,8 +31,8 @@ the stakeholder's request.
   is meaningful, r, and R-squared. Put the slope and r on the chart.
 - Take the log of a predictor that spans orders of magnitude, and say what the slope then means
   ("per tenfold increase").
-- List the largest positive and the largest negative residuals with the cases' names. The next
-  hypothesis is about what the cases above the line share, or what the cases below it share.
+- List the largest positive and the largest negative residuals with the cases' names. The
+  question to put to the analyst: what do the cases above the line share, or the cases below it?
 - Compare blocks of variables by R-squared to see which block explains more.
 - Before calling a pattern the cause of an event, fit the same model where the event did not
   happen (another year, another group). Wording: `eda-write-prose`, Words that match the data.
@@ -48,8 +48,8 @@ the stakeholder's request.
   are easier to describe; show both profiles and say why.
 - Profile each cluster: the mean of each feature, the count, and an outcome the clustering did not
   use. Cross-tabulate the clusters against any known label. Name each cluster by its profile.
-- The next hypothesis is about what the members of a cluster share that the features did not
-  include, or whether the clusters differ on an outcome they were not built from.
+- The questions to put to the analyst: what do the members of a cluster share that the features
+  did not include; do the clusters differ on an outcome they were not built from?
 - Hierarchical clustering with Ward linkage checks whether the groups are stable.
 
 ## Classification
@@ -84,7 +84,7 @@ the stakeholder's request.
   threshold rule counts as a classifier.
 - Report the confusion matrix, accuracy, precision, and recall, and say which error costs more
   for this decision.
-- List the misclassified cases. The next hypothesis is about what is different about them.
+- List the misclassified cases. The question to put to the analyst: what is different about them?
 - A rule or threshold chosen after seeing the case will flag the case. Test it on cases that did
   not set it (another period, held-out rows), or say it is untested.
 
@@ -94,8 +94,8 @@ the stakeholder's request.
 2. "**What we found.**", with the numbers.
 3. "**What the model surfaced.**": the specific cases (the largest residuals, the cluster
    profiles, the misclassified cases).
-4. "**Next hypotheses.**": two or three, each about one surfaced case, each with its refutation
-   (`eda-write-hypotheses`).
+4. "**Next hypotheses.**": the analyst's, two or three, each about one surfaced case, in the form
+   `eda-hypothesis` sets. Ask the analyst for them; do not write them.
 
 *The analyst decides* the target and the features, the number of clusters, whether the groups mean
 anything, and which surfaced case to examine next.

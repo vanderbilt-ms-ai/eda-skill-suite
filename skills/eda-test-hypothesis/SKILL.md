@@ -1,15 +1,15 @@
 ---
 name: eda-test-hypothesis
-description: Chooses the analysis and figure that test one hypothesis as it is worded, states the verdict, and writes the next hypothesis. Use whenever a hypothesis is ready to be tested against data.
+description: Chooses the analysis and figure that test one hypothesis as it is worded, states the verdict, and puts the candidate next questions to the analyst. Use whenever a hypothesis is ready to be tested against data.
 ---
 
 # Testing one hypothesis
 
-**Inputs.** One hypothesis, written as `eda-write-hypotheses` requires, and the clean data the
-setup notebook saved.
+**Inputs.** One of the analyst's hypotheses, in the form `eda-hypothesis` sets, and the clean data
+the setup notebook saved.
 
 **Produces.** One section of the analysis notebook: the opening markdown, the code, the chart and
-table, the "What we found" cell with the verdict, and the next hypothesis. The section's shape is
+table, the "What we found" cell with the verdict, and the candidate next questions. The section's shape is
 in `eda-write-notebook` (Structure); the figure rules are in `eda-draw-figure`.
 
 ## 1. Read the claim exactly
@@ -55,18 +55,19 @@ Write in the opening markdown:
 - A result exactly on the refutation line is decided by the refutation as written: "refuted if
   fewer than three" means three holds. State the result and the line together.
 - A hypothesis that does not hold stays that way. A different measure on which the claim would
-  hold is a new hypothesis in the second set (`eda-write-hypotheses`), written because this one
-  failed. It does not change this verdict.
-- If the data cannot test the claim as worded, say so, and write the closest testable claim as a
-  new hypothesis.
+  hold is a candidate for a new hypothesis in the second set, which the analyst writes if they
+  choose to. It does not change this verdict.
+- If the data cannot test the claim as worded, say so, name the closest testable claim, and ask
+  the analyst whether to write it as a new hypothesis.
 
 *The analyst decides* whether the test matches the claim, and the verdict.
 
 ## 4. The next hypothesis
 
-End the section with the next question, chosen as `eda-investigate` (Where the next hypothesis
-comes from) describes, written as a hypothesis with its refutation. The section that tests it
-opens with that hypothesis and has its own chart.
+End the section with the candidate next questions, from the list in `eda-investigate` (Where the
+next hypothesis comes from), and ask the analyst which to take. The analyst writes it as a
+hypothesis (form in `eda-hypothesis`); the section that tests it opens with that hypothesis and
+has its own chart.
 
 *The analyst decides* which hypothesis comes next.
 

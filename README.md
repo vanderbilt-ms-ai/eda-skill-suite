@@ -14,9 +14,9 @@ on those cases and on College Scorecard data.
 A request arrives with no data. The analyst writes the brief and the first hypotheses from the
 request alone, each with the result that would refute it. The setup notebook finds the source,
 downloads each piece once and checks it, renames the columns, inspects the data, and runs every
-data-quality check. What those checks show becomes the second set of hypotheses, written in the
-same form before any is tested. The analysis notebook tests each hypothesis as worded, and after
-each verdict the next question is written as the next hypothesis. A regression, a clustering, or a
+data-quality check. The analyst writes what those checks show as the second set of hypotheses, in
+the same form, before any is tested. The analysis notebook tests each hypothesis as worded, and after
+each verdict the analyst writes the next question as the next hypothesis. A regression, a clustering, or a
 classifier is fitted to find the next cases to examine, not as the result. The notebook ends with
 a synthesis, the limits, a memo, and a recap table. The process returns to the setup notebook
 whenever a finding needs data it does not have.
@@ -34,7 +34,7 @@ Each skill opens with what it takes in and what it produces.
 | Skill | Takes in | Produces | Rules it owns |
 |---|---|---|---|
 | `eda-investigate` | the stakeholder's request | the project folder: two notebooks, `hypotheses.md`, `decisions.md`, `verification.md`, `data/` | the order of the stages; handing decisions back; doing the analysis in the notebook; the section with no hypothesis; returning for more data; where the next hypothesis comes from |
-| `eda-write-hypotheses` | the request; later, the setup notebook's outputs or a finding | `hypotheses.md`; the brief and hypotheses cells of the analysis notebook | the brief; what a hypothesis contains; the first set (before data) and the second set (after) |
+| `eda-hypothesis` | the analyst's request for help with a hypothesis, at any stage | a hypothesis in the analyst's words, or an evaluation of theirs | what a hypothesis contains; the questions that form or evaluate one. Runs only when the analyst asks |
 | `eda-get-data` | `hypotheses.md` | the setup notebook, `data/raw/`, clean files, `PROVENANCE.md` | the source; the request; the first look; checks against known facts; provenance |
 | `eda-check-data` | the setup notebook after its first look | the data-quality and preprocessing sections | every quality check, missing values and gaps in a series included; the section's budget; preprocessing |
 | `eda-test-hypothesis` | one hypothesis and the clean data | one section of the analysis notebook | reading the claim; the analysis for each kind of claim; the verdict; the next hypothesis |

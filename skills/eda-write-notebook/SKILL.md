@@ -17,7 +17,10 @@ gets the same numbers.
 
 ## Structure
 
-1. The first cell is the brief (`eda-write-hypotheses`).
+1. The first cell is the brief, written by the analyst from the request: who the analyst is, who is
+   asking, and what happened; the observation, stated before any question (`eda-write-prose`,
+   Observation before question), with the stakeholder's numbers until the setup notebook computes
+   them; the request, quoted; the question or questions it reduces to.
 2. The setup cell holds imports and the data load, nothing else. Data comes from the files the
    setup notebook wrote, by relative path (`data/...`).
 3. One section per step of the investigation, in the order the steps happened, with a `## `
