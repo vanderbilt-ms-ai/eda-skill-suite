@@ -1,150 +1,134 @@
 ---
 name: eda-notebook-setup
-description: Turns a stakeholder's problem into questions and hypotheses, then builds the setup notebook that pulls, checks, and documents the data. Use at the start of any analysis.
+description: Turns a stakeholder's problem into a brief, questions, and hypotheses, then builds the setup notebook that pulls, checks, and documents the data. Owns the rules for writing hypotheses at every stage. Use at the start of any analysis and whenever a new hypothesis is written.
 ---
 
 # EDA notebook setup
 
-The analyst receives a problem and nothing else. This stage turns it into a question the data can
-answer and a dataset whose shape and origin are known. Follow `notebook-standards`,
-`figure-standards`, and `writing-standards` in every cell.
+The analyst receives a problem and nothing else. This stage turns it into questions the data can
+answer, hypotheses that can fail, and a dataset whose shape and origin are known. This skill owns
+the brief, the hypothesis rules, and the setup notebook's sections. Prose rules are in
+`eda-writing-standards`, cell rules in `eda-notebook-standards`.
 
 ## 1. The brief (first cell of the analysis notebook)
 
-- Who the analyst is, who is asking, and what situation prompted it, in plain sentences.
-- **The observation, stated specifically before any question**: what was measured, by how much,
-  compared with what ("National polls put Biden ahead by 8.4 points on average; he won by 4.4").
-  If the numbers come from the data, compute them in the setup notebook and fill them in.
+- Who the analyst is, who is asking, and what situation prompted it.
+- The observation, stated before any question (`eda-writing-standards`, Observation before
+  question). Write it first as the stakeholder reports it. After the pull, the setup notebook
+  computes the observation's numbers in its last section, "The numbers the brief quotes", and the
+  brief is updated to cite them. The questions do not change when the numbers arrive.
 - The stakeholder's request, quoted.
-- The question or questions it reduces to, worded to match the observation and no broader
-  ("Why were the polls off?", not "What went wrong?").
-- Write the observation first as the stakeholder reports it, which is enough to write the
-  questions and hypotheses. After the pull, the setup notebook computes the observation's numbers in
-  a short final section, "The numbers the brief quotes", and the brief is updated to cite them. The
-  questions and hypotheses do not change when the numbers arrive.
+- The question or questions it reduces to.
 
 *The analyst decides* the questions.
 
-## 2. Hypotheses, written before any data is pulled
+## 2. Hypotheses
 
-The hypotheses and what would refute each one are written **before the request runs**, from the
-problem statement alone, and they do not change after the data arrives. Create the analysis
-notebook at this point with only its brief and its "Hypotheses" section (the setup cell comes
-between them later). If a later look at the data suggests a better hypothesis or threshold, it
-becomes a **new question** in its own section, labelled as such; the original stands with its own
-verdict.
+Every hypothesis in the investigation, whenever it is written, has the same form:
 
-**Which hypotheses come first.** The opening hypotheses are the explanations already on the table,
-not the analyst's own theory of what happened:
-- the explanations the stakeholder, or the people around them, already give ("the polls had small
-  samples"; "the polls missed late deciders") - tested exactly as worded, because they
-  are usually wrong and testing them is the point;
-- the obvious checks the stakeholder would expect (was it unusual at all?);
-- **one** "something else" hypothesis, stated at the level of the question, not as a mechanism:
-  "Neither: something about where the polls were taken, not how they were run, explains the
-  error." It is
-  one claim, with one verdict.
+- One claim, as a full sentence that could be false. A claim that bundles several parts gets split,
+  so each has its own verdict.
+- "Refuted if": the result that would refute it. A hypothesis with no such result is dropped.
+- The smallest difference that would change the stakeholder's decision, not only its direction
+  ("refuted if the gain does not recover the extra cost within 10 years", not "refuted if the gain
+  is zero or less"). A claim about a rank ("the worst in years") is tested by the rank in a named
+  window and needs no margin.
+- A number in the order it will be tested, within its question and its series.
+- The words of the request it tests, where it tests one: list each word that carries a claim and
+  what it requires ("pays off" compares a gain with its cost; "the worst in years" names a window;
+  "could we have told in advance" means using only what was known before the outcome).
 
-Do **not** write opening hypotheses that need knowledge of what the data will show: a specific
-mechanism, a measure you would only think of after looking, a threshold chosen from the case. Those
-arrive later as digging-deeper questions, each one prompted by a finding, and that sequence is the
-investigation. Two to four hypotheses per question is typical; seven is a sign the analyst has
-written the answer in advance.
+There are two series, and the difference between them is what the analyst knew when writing.
 
-- Each question gets its own numbered hypotheses, as full sentences that could be false.
-- **Test the stakeholder's words.** List the words in the request that carry a claim and say what
-  each one requires: "pays off" compares a gain with its cost, not only "more goes with more";
-  "the worst in years" names a window (say which, and pull it); "could we have told in advance"
-  means using only what was known before the outcome.
-- **Say how big a difference has to be to matter.** Each refutation names the smallest difference
-  that would change the stakeholder's decision, not only its direction ("refuted if the gain does
-  not recover the extra cost within 10 years", not "refuted if the gain is zero or less"). A
-  difference in the right direction but below that size does not make the hypothesis hold.
-- **One claim per hypothesis.** A hypothesis that bundles several claims ("the month was cold and
-  wet and windy") gets split, so each has its own verdict. "Holds on one of three parts" is not a
-  verdict.
-- **Claims about a rank** ("the worst in years"): the rank in the named window is the test; a
-  margin is not needed. If one is wanted, base it on the ordinary year-to-year spread (the standard
-  deviation across years), not on a number invented for the case.
-- Number the hypotheses in the order they will be tested.
-- For each, write down the result that would refute it. Drop any hypothesis with no such result.
-- In a student version only: a prompt for the student's own prediction before any data ("My
-  prediction, before looking at any data: ... and why"). An analyst's deliverable leaves it out.
+**Series A: before any data.** Written from the problem statement alone, before the request runs,
+and never edited afterwards. They are the explanations already on the table: what the stakeholder
+or the people around them say ("the polls had small samples"), the checks the stakeholder would
+expect (was it unusual at all?), and one "something else" claim stated at the level of the question
+("neither: something about where the polls were taken explains the error"). Two to four per
+question is typical. Write them to `hypotheses.md` before the request runs, and insert that file
+into the analysis notebook verbatim; `eda-tools/scripts/check_order.py` checks the file predates
+the data.
 
-*The analyst decides* the hypotheses.
+**Series B: after looking.** The first look and the data-quality checks show distributions, gaps,
+groups, and ranges that the problem statement could not. Each later finding does the same. A
+question those views raise is written as a series B hypothesis, in the same form, before its
+section runs, with one more line: what prompted it (the view, the table, or the finding). The first
+batch is written in the analysis notebook right after the data-quality section is read, under its
+own heading; later ones open the digging-deeper section that tests them. Series B hypotheses are
+numbered B1, B2, and so on.
+
+The two series serve different purposes. Series A tests what people already believe, and a failed
+series A hypothesis stays failed (`eda-analysis-selection`, The verdict); a better measure that
+turns up later is a series B hypothesis, not a repair. Series B is the investigation: it carries the
+questions the data itself raised, and it is where most findings come from.
+
+In a student version only, add a prompt for the student's own prediction before any data. An
+analyst's deliverable leaves it out.
+
+*The analyst decides* the hypotheses in both series.
 
 ## 3. Where the data comes from (setup notebook, section 1)
 
-- Publisher, product, the entity and its identifiers (station, institution, poll), links to the
-  browse page and the API or file documentation.
+- Publisher, product, the entity and its identifiers, links to the browse page and the API or file
+  documentation.
 - Why this source fits the question. Interrogate the data-generating process: who collected it and
   why, what it is composed of, how it was collected and processed before publication, how it is
   distributed and maintained, and which of those is unknown.
-- Confirm the data is actually retrievable before building on it: APIs lag, recent periods may only
-  be in bulk files, units differ between products, archives close. Plan a fallback.
+- Confirm the data is retrievable before building on it: APIs lag, recent periods may only be in
+  bulk files, units differ between products, archives close. Plan a fallback.
 
 *The analyst decides* the source.
 
 ## 4. Naming conventions (section 2)
 
-Explain the convention in markdown, then define the mapping(s) in one cell: source names to
-lower_snake_case names with units (`margin_poll` to `poll_margin_pts`), codes to words. Everything after this cell
-uses the new names. Source names appear only in the request.
+Define the mapping from source names to the notebook's names in one cell, after a markdown cell
+that explains the convention. The convention itself is in `eda-notebook-standards`, Naming.
 
 ## 5. The request (section 3)
 
 - Pull the data in code, from the source, so it can be re-run. Keep the raw download unchanged in
   `data/raw/`.
-- **Download each piece once.** The download helper must:
-  1. return the file in `data/raw/` without a request when it is already there and has passed the
-     check below;
-  2. otherwise request it, retrying a slow or failed request a few times;
-  3. **check the response before saving it**: not empty, and it covers the requested period and
-     entities (first and last date, row count against the expected count). An API can answer
-     "success" with an empty or cut-off file;
-  4. save only a response that passes, and list the pieces that failed.
-  Then re-request **only the failed pieces**, in a smaller unit if needed (one month instead of a
-  winter). Never re-download pieces that already passed, and never start the whole pull over in a
-  different unit.
-- **Size the request before running it.** Estimate the number of requests and the time from one
-  test request, made once while planning; record the estimate in markdown rather than re-running
-  the test request every time the notebook runs. Pull the smallest set that tests the hypotheses as worded (the comparison window the
-  hypotheses name, the variables they need). Widen it only when a later question needs more, and
-  then pull only the addition. Say in markdown which window was pulled and why, because ranks and
-  "the most in N years" depend on it.
-- Ask for only what the questions need (columns, period, entities), and say why in markdown.
+- Use the fetch helper from `eda-tools` for every piece: it returns a piece already on disk that
+  passed its check, retries a failed request, checks a response before saving it (not empty; covers
+  the requested period and entities), and lists the pieces that failed. Re-request only the failed
+  pieces, in a smaller unit if needed. Never start the whole pull over in a different unit.
+- Size the request before running it: estimate the number of requests and the time from one test
+  request made while planning, and record the estimate in markdown rather than re-running it.
+- Pull the smallest set that tests the series A hypotheses as worded: the comparison window they
+  name, the variables they need. Say in markdown which window was pulled and why, because ranks
+  depend on it. Widen it only when a later hypothesis needs more, and then pull only the addition.
 - Rename immediately after loading, then convert units, then derive simple fields (year, day).
 
 ## 6. First look (section 4)
 
-Run the inspection routine and show the outputs (they are the evidence for what follows):
-`df.shape`, `df.info()`, `df.head()`, `df.tail()`, `df.sample(5, random_state=0)`, `df.describe()`.
-Then answer, in markdown, the three tidy-data sentences:
+Run the inspection routine and show the outputs: `df.shape`, `df.info()`, `df.head()`,
+`df.tail()`, `df.sample(5, random_state=0)`, `df.describe()`. Then answer, in markdown, the three
+tidy-data sentences:
 
 > This is a dataset about ___. Each row represents ___. The columns represent ___.
 
-State the **unit of analysis**, the time span and entities covered, and anything surprising.
+State the unit of analysis, the time span and entities covered, and anything surprising.
 *The analyst confirms* the unit of analysis.
 
 ## 7. Then data quality
 
-Hand over to `eda-data-quality` (sections 5 and on of the same notebook). Every check runs and is
-reported, even when the data is clean.
+Hand over to `eda-data-quality` (sections 5 and on of the same notebook). When it is done, the
+series B hypotheses are written (section 2 above) before any hypothesis is tested.
 
-## 8. Checks against facts you already know
+## 8. Checks against facts you already know (section 6)
 
-A `pd.Series` of named boolean checks: the right entity, the expected row counts, a value you know
-from outside the data (a published total, a known event), units in a plausible range, keys unique.
-Followed by "**What we found.**"
+A `pd.Series` of named boolean checks: the right entity, the expected row counts, a value known
+from outside the data (a published total, a known event), units in a plausible range, keys
+unique. Followed by "**What we found.**"
 
-## 9. Save and provenance
+## 9. Save and provenance (section 7)
 
-Write the cleaned files to `data/` and a `data/PROVENANCE.md`: source, request, pull time (UTC; for
-a file reused from an earlier pull, the file's saved time, and say so),
-data version or commit if available, conversions, fallbacks, decisions that changed rows. Values
-from recent periods may be provisional; the pull date matters.
+Write the cleaned files to `data/` and `data/PROVENANCE.md`: source, request, pull time in UTC
+(for a file reused from an earlier pull, the file's saved time, and say so), data version or
+commit if available, conversions, fallbacks, decisions that changed rows. Values from recent
+periods may be provisional; the pull date matters.
 
 ## Reference
 
-- `references/setup-template.md` - the section skeleton of a setup notebook, with the markdown each
-  section needs, taken from finished case studies.
+- `references/setup-template.md`: the section skeleton of a setup notebook, with the job of each
+  section's markdown.

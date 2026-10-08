@@ -8,13 +8,16 @@ Numbers drawn inside a figure (a title, a legend) cannot be traced from the note
 lists them as warnings, and they are checked by looking at the figure.
 
 What it can check automatically (everything else in the standards needs reading):
-  notebook  - prose print statements; analysis sections without a "What we found" cell; errors or
-              unexecuted cells; absolute paths
+  notebook  - prose print statements (top level or inside a loop); analysis sections without a
+              "What we found" cell; errors or unexecuted cells; absolute paths
   figures   - plotting cells with no title or no axis labels (directly, or through a notebook-defined
               helper that sets them or takes them as parameters); bar charts whose y-limits are set
               to start above zero
-  writing   - non-ASCII punctuation; stock phrases; variable names in findings; very short
-              sentences in findings (possible slogans) for review
+  writing   - non-ASCII punctuation; stock phrases and idioms (ERROR); variable names in findings
+              (ERROR); reversals, framing sentences, wording that may claim more than the record,
+              and markdown cells over 200 words (WARN)
+  hypotheses - a "Hypothesis ..." section whose opening markdown has no "Refuted if" (ERROR); a
+              "Digging deeper ..." or "Lens ..." section without one (WARN)
   --trace   - numbers quoted in the markdown that no output shows:
               "What we found" cells     against the outputs above them (also inside a synthesis)
               other cells under a Synthesis, Memo, or Recap heading
@@ -22,6 +25,7 @@ What it can check automatically (everything else in the standards needs reading)
               the brief                 the numbers under its "The observation" / "What was
                                         observed" label (not the quoted request), against every
                                         output here and in a sibling *step0* or *setup* notebook
+              A number followed by 's (a name such as 538's) is not traced.
               A number matches an output if they are equal after dropping commas, $ and %, ignoring
               sign ("$1,234 less" matches -1234.0), with the output rounded to the number's decimals;
               a percent ("16.3 percent", "93 to 100 percent") also matches a share (0.163).
@@ -38,7 +42,21 @@ PLOT_CALLS = re.compile(r"\.(bar|barh|plot|scatter|hist|boxplot|imshow|pcolormes
 STOCK_PHRASES = ["it is worth noting", "it's worth noting", "let's dive", "dive into", "interestingly",
                  "in conclusion", "at the end of the day", "tells a story", "tell a story",
                  "the data speaks", "numbers don't lie", "perfect storm", "game changer",
-                 "needle in a haystack", "tip of the iceberg", "paints a picture", "a tale of"]
+                 "needle in a haystack", "tip of the iceberg", "paints a picture", "a tale of",
+                 "cry wolf", "cries wolf", "smoking gun", "silver bullet", "low-hanging fruit",
+                 "move the needle", "moves the needle", "double-edged", "elephant in the room",
+                 "in a nutshell", "the bottom line is", "it goes without saying"]
+# A sentence that announces what the text is about to do instead of doing it.
+FRAMING = re.compile(r"(?im)^(?:[ \t]*(?:[-*+]|\d+[.)])?[ \t]*(?:\*\*[^*\n]+\*\*[ \t]*)?)"
+                     r"(?:This (?:section|notebook|part|cell|step)\b|In this (?:section|notebook|part)\b|"
+                     r"We (?:will|now) |Below,? we |The next section\b|What follows\b|Here we )")
+# The reversal: "not X - but Y", "it's not X, it's Y".
+REVERSAL = re.compile(r"(?i)\bnot\b[^.!?\n]{2,60}?\s-\s(?:but|until|yet|it'?s)\b|\bit'?s not\b[^.!?\n]{2,60}?,\s*it'?s\b")
+# Words that may claim more than the record holds; a person decides each one.
+BEYOND_RECORD = re.compile(r"(?i)\bfell as\b|\bset a record\b|\ba record\b(?! of)|\brecord-breaking\b|"
+                           r"\bdid not happen\b|\bcaused?\b|\bbecause of\b|\bled to\b|\bdue to\b")
+WALL_OF_TEXT = 200   # words in one markdown cell, tables excluded
+BAR_CALL = re.compile(r"\.bar\(|\.barh\(|kind\s*=\s*[\"']barh?[\"']|\.plot\.barh?\(")
 NON_ASCII_PUNCT = {"\u2014": "em dash", "\u2013": "en dash", "\u2192": "arrow", "\u2190": "arrow",
                    "\u201c": "curly quote", "\u201d": "curly quote", "\u2018": "curly quote",
                    "\u2019": "curly quote", "\u2026": "ellipsis character"}
@@ -50,9 +68,6 @@ SUMMARY_SECTIONS = ("synthesis", "memo", "recap")
 FINDING = re.compile(r"^\s*\*\*what we found", re.I)
 # The whole bold label, so the closing ** is not left behind to pair with the next bold span.
 FINDING_LABEL = re.compile(r"^\s*\*\*what we found[^*]*\*\*[.:]?", re.I)
-# A bold (or italic) label ending in a period or colon at the start of a line or bullet:
-# "- **Units.** ...", "**Analyst decision.** ...".
-BOLD_LABEL = re.compile(r"^([ \t]*(?:[-*+]|\d+[.)])?[ \t]*)(\*\*?)[^*\n]+?[.:]\2(?!\*)", re.M)
 HEADING_NUMBER = re.compile(r"^#{1,6}[ \t]+(\d+(?:\.\d+)*)\.?(?=\s)", re.M)
 
 # What sets each figure element, inside a helper's body: a call with an argument other than an empty
@@ -186,6 +201,15 @@ def lint(path, trace=False):
 
     section, section_has_code, section_has_finding, section_start = None, False, False, None
     section_has_image = False
+    pending_refutation = None   # [level, heading cell] until "Refuted if" appears before the first code cell
+
+    def section_kind(name):
+        lowered = (name or "").lower()
+        if lowered.startswith("hypothesis"):
+            return "ERROR"
+        if lowered.startswith("digging deeper") or lowered.startswith("lens"):
+            return "WARN"
+        return None
 
     def close_section():
         if section and section_has_code and not section_has_finding:
@@ -228,10 +252,28 @@ def lint(path, trace=False):
             lowered = text.lower()
             for phrase in STOCK_PHRASES:
                 if phrase in lowered:
-                    report("ERROR", i, f"writing: stock phrase '{phrase}'")
+                    report("ERROR", i, f"writing: stock phrase or idiom '{phrase}'")
+            for match in FRAMING.finditer(text):
+                report("WARN", i, "writing: framing sentence (say the content, not what comes next)",
+                       text[match.start():match.start() + 70].strip().replace("\n", " "))
+            for match in REVERSAL.finditer(text):
+                report("WARN", i, "writing: reversal construction", match.group()[:70])
+            for match in BEYOND_RECORD.finditer(text):
+                report("WARN", i, "writing: wording may claim more than the record shows", match.group())
+            words = sum(len(line.split()) for line in text.splitlines() if not line.lstrip().startswith("|"))
+            if words > WALL_OF_TEXT:
+                report("WARN", i, f"writing: markdown cell of {words} words (over {WALL_OF_TEXT}); split or cut")
+            if heading and section_kind(section):
+                pending_refutation = [section_kind(section), i]
+            if pending_refutation and "refut" in lowered:
+                pending_refutation = None
             continue
 
         # code cell
+        if pending_refutation:
+            level, at = pending_refutation
+            report(level, at, "hypotheses: section states no 'Refuted if' before its first code cell", section)
+            pending_refutation = None
         section_has_code = True
         if any("image/png" in out.get("data", {}) for out in cell.get("outputs", [])):
             section_has_image = True
@@ -242,7 +284,7 @@ def lint(path, trace=False):
                 report("ERROR", i, "notebook: cell raised an error", out.get("ename", ""))
         for line in text.splitlines():
             stripped = line.strip()
-            if line.startswith("print(") and re.search(r"print\(\s*f?[\"']", stripped):
+            if stripped.startswith("print(") and re.search(r"print\(\s*f?[\"']", stripped):
                 report("ERROR", i, "notebook: prose print statement (show a chart or labelled table)",
                        stripped[:70])
                 break
@@ -270,7 +312,7 @@ def check_figure(text, i, report, helpers):
     if not (re.search(r"ylabel|set_ylabel", text) or via_helper("ylabel")):
         report("ERROR", i, "figure: no y-axis label")
     lim = re.search(r"ylim\s*=?\s*\(?\s*\(?\s*([0-9.]+)", text)
-    if lim and ".bar(" in text and float(lim.group(1)) > 0:
+    if lim and BAR_CALL.search(text) and float(lim.group(1)) > 0:
         report("ERROR", i, "figure: bar chart y-axis does not start at zero")
 
 
@@ -280,14 +322,6 @@ def check_finding(text, i, report):
         name = token[0] or token[1]
         report("ERROR", i, "writing: variable name in a finding", name)
         break
-    # Bold labels ("- **Units.**") are not sentences, nor are list markers; other bold text is prose.
-    prose = re.sub(r"^[ \t]*(?:[-*+]|\d+[.)])[ \t]+", "", BOLD_LABEL.sub("", body), flags=re.M).replace("**", "")
-    # "Does not apply: [why]" lines and questions ("Up for whom?") are not slogans.
-    prose = re.sub(r"(?im)^[ \t]*does not apply:.*$", "", prose)
-    for sentence in re.split(r"(?<=[.!?])\s+", prose):
-        words = sentence.strip().split()
-        if 0 < len(words) <= 5 and not re.search(r"\d", sentence) and not sentence.strip().endswith("?"):
-            report("WARN", i, "writing: very short sentence in a finding (slogan?)", sentence.strip()[:60])
 
 
 NUMBER = re.compile(r"(?<![\w.])-?\d[\d,]*\.?\d*%?")
@@ -309,6 +343,8 @@ def trace_numbers(body, i, report, pool, headings, where):
             continue
         if SECTION_REF.search(body[max(0, match.start() - 60):match.start()]):
             continue  # "section 5.3", "sections 5.3 and 5.11"
+        if body[match.end():match.end() + 2] in ("'s", "\u2019s"):
+            continue  # a name, such as 538's
         if not token.startswith("-") and not token.endswith("%") and raw in headings:
             continue  # a heading number, "5.15"
         decimals = len(raw.split(".")[1]) if "." in raw else 0
