@@ -6,13 +6,13 @@ description: Writes the brief, the questions, and the hypotheses of an investiga
 # Write the hypotheses
 
 A question worth the reader's time is written as a hypothesis with its refutation before it is
-tested. This skill owns the brief and every rule about hypotheses; `eda-get-the-data` builds the
-setup notebook, and `eda-test-a-hypothesis` tests what is written here.
+tested. This skill owns the brief and every rule about hypotheses; `eda-get-data` builds the
+setup notebook, and `eda-test-hypothesis` tests what is written here.
 
 ## The brief (first cell of the analysis notebook)
 
 - Who the analyst is, who is asking, and what situation prompted it.
-- The observation, stated before any question (`eda-write-about-data`, Observation before
+- The observation, stated before any question (`eda-write-prose`, Observation before
   question). Write it first as the stakeholder reports it. After the pull, the setup notebook
   computes the observation's numbers in its last section, "The numbers the brief quotes", and the
   brief is updated to cite them. The questions do not change when the numbers arrive.
@@ -45,7 +45,7 @@ or the people around them say ("the polls had small samples"), the checks the st
 expect (was it unusual at all?), and one "something else" claim stated at the level of the question
 ("neither: something about where the polls were taken explains the error"). Two to four per
 question is typical. Write them to `hypotheses.md` before the request runs, and insert that file
-into the analysis notebook verbatim; `eda-run-a-script/scripts/check_order.py` checks the file predates
+into the analysis notebook verbatim; `eda-scripts/scripts/check_order.py` checks the file predates
 the data.
 
 **Series B: after looking.** The first look and the data-quality checks show distributions, gaps,
@@ -57,7 +57,7 @@ own heading; later ones open the digging-deeper section that tests them. Series 
 numbered B1, B2, and so on.
 
 The two series serve different purposes. Series A tests what people already believe, and a failed
-series A hypothesis stays failed (`eda-test-a-hypothesis`, The verdict); a better measure that
+series A hypothesis stays failed (`eda-test-hypothesis`, The verdict); a better measure that
 turns up later is a series B hypothesis, not a repair. Series B is the investigation: it carries the
 questions the data itself raised, and it is where most findings come from.
 

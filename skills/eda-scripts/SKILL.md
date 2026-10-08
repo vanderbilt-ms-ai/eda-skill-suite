@@ -1,5 +1,5 @@
 ---
-name: eda-run-a-script
+name: eda-scripts
 description: The scripts the EDA skills call: the notebook lint and number trace, the cached and checked download helper, the figure extractor, and the hypotheses-before-data check. Use whenever another EDA skill names a script, or when a notebook needs to fetch data, be linted, or have its figures viewed.
 ---
 
@@ -9,7 +9,7 @@ Every script the suite uses lives here, once. The other skills name the script; 
 what it does and how to run it. All scripts need Python 3 and `pandas`; the lint also needs
 `nbformat` installed so notebooks execute.
 
-Find this folder with `ls ~/.claude/skills/eda-run-a-script/scripts` or `ls .claude/skills/eda-run-a-script/scripts`
+Find this folder with `ls ~/.claude/skills/eda-scripts/scripts` or `ls .claude/skills/eda-scripts/scripts`
 (whichever the install used), and run the scripts from there. Only `fetch.py` is copied into the
 project, because the notebook imports it.
 
@@ -21,7 +21,7 @@ python scripts/nb_lint.py NOTEBOOK.ipynb --trace
 
 ERROR lines are breaches; WARN lines need a person's decision. Exit code 1 on any ERROR. It checks:
 - notebook: prose print statements; a section that tests something but has no "What we found"
-  cell; a hypothesis section with no "Refuted if"; unexecuted cells; cells that raised; absolute
+  cell; a hypothesis, digging-deeper, or lens section with no "Refuted if"; unexecuted cells; cells that raised; absolute
   paths.
 - figures: a plotting cell with no title or axis labels (helpers that set them count); a bar
   chart whose y-axis starts above zero.

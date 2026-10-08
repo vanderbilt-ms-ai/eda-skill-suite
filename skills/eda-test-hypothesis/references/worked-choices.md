@@ -41,10 +41,10 @@ in `SKILL.md`, not rules of their own.
 ## "[Something] lasted longer than usual." (pattern; from the ice storm)
 
 - Irregular readings mean counting rows does not count periods: resample first
-  (`eda-check-the-data`, What a row is).
+  (`eda-check-data`, What a row is).
 - Analysis: periods past the threshold per year in the same window; the longest unbroken run; the
   cumulative count.
-- Gaps are handled as `eda-check-the-data` (Gaps in a series) says, and the finding says which way.
+- Gaps are handled as `eda-check-data` (Gaps in a series) says, and the finding says which way.
 - Figure: cumulative count past the threshold, one line per year, the case highlighted.
 
 ## "A single number we already track would have flagged it." (pattern; from the ice storm)

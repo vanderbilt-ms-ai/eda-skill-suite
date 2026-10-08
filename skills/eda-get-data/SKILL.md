@@ -1,13 +1,13 @@
 ---
-name: eda-get-the-data
+name: eda-get-data
 description: Builds the setup notebook that finds, fetches, renames, inspects, and documents the data for an investigation, pulling each piece once and keeping the raw files unchanged. Use after the hypotheses are written and whenever the analysis needs data it does not have.
 ---
 
 # Get the data
 
 The hypotheses are written (`eda-write-hypotheses`). This stage finds a source that can test them
-and produces a dataset whose shape and origin are known. Prose rules are in `eda-write-about-data`,
-cell rules in `eda-write-the-notebook`.
+and produces a dataset whose shape and origin are known. Prose rules are in `eda-write-prose`,
+cell rules in `eda-write-notebook`.
 
 ## 1. Where the data comes from (setup notebook, section 1)
 
@@ -24,13 +24,13 @@ cell rules in `eda-write-the-notebook`.
 ## 2. Naming conventions (section 2)
 
 Define the mapping from source names to the notebook's names in one cell, after a markdown cell
-that explains the convention. The convention itself is in `eda-write-the-notebook`, Naming.
+that explains the convention. The convention itself is in `eda-write-notebook`, Naming.
 
 ## 3. The request (section 3)
 
 - Pull the data in code, from the source, so it can be re-run. Keep the raw download unchanged in
   `data/raw/`.
-- Use the fetch helper from `eda-run-a-script` for every piece: it returns a piece already on disk that
+- Use the fetch helper from `eda-scripts` for every piece: it returns a piece already on disk that
   passed its check, retries a failed request, checks a response before saving it (not empty; covers
   the requested period and entities), and lists the pieces that failed. Re-request only the failed
   pieces, in a smaller unit if needed. Never start the whole pull over in a different unit.
@@ -54,7 +54,7 @@ State the unit of analysis, the time span and entities covered, and anything sur
 
 ## 5. Then data quality
 
-Hand over to `eda-check-the-data` (sections 5 and on of the same notebook). When it is done, the
+Hand over to `eda-check-data` (sections 5 and on of the same notebook). When it is done, the
 series B hypotheses are written (`eda-write-hypotheses`) before any hypothesis is tested.
 
 ## 6. Checks against facts you already know (section 6)
