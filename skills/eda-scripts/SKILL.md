@@ -26,7 +26,8 @@ ERROR lines are breaches; WARN lines need a person's decision. The exit code is 
 
 Errors: a print statement that narrates a result, at the top level or inside a loop; a section
 that tests something with no "What we found" cell; a hypothesis, digging-deeper, or model section
-with no "Refuted if" before its first code cell; a cell not executed; a cell that raised; an
+with no "Refuted if" before its first code cell; a notebook with first hypotheses and no "Second
+hypotheses" section; a cell not executed; a cell that raised; an
 absolute path; a plotting cell with no title or axis label (a helper that sets them counts); a
 bar chart whose y-axis starts above zero; non-ASCII punctuation; a stock phrase or idiom; a
 column name in a finding.
@@ -70,6 +71,7 @@ python scripts/check_order.py PROJECT_DIR            # at verification
 ```
 
 `--stamp` records the file's hash and the time in `hypotheses.stamp`. The check reports a changed
-file, a file in `data/raw/` older than the stamp, and an analysis notebook that does not hold
-`hypotheses.md` verbatim. Without a stamp it compares file modification times, which a copy or a
+file, a file in `data/raw/` older than the stamp, an analysis notebook that does not hold
+`hypotheses.md` verbatim, and non-ASCII characters in `hypotheses.md`, `decisions.md`, or
+`verification.md`. Without a stamp it compares file modification times, which a copy or a
 checkout can reset, and says so.

@@ -9,6 +9,7 @@ The check reads the stamp and reports:
   ERROR  hypotheses.md has changed since it was stamped
   ERROR  a file in data/raw/ is older than the stamp (the data was pulled first)
   ERROR  the analysis notebook has no markdown cell containing hypotheses.md's text
+  ERROR  hypotheses.md, decisions.md, or verification.md holds non-ASCII characters
   WARN   no stamp was written; only file modification times can be compared, and those are weak
 Exit code 1 on any ERROR.
 """
@@ -58,6 +59,12 @@ def check(project):
         for p in raw_files:
             if p.stat().st_mtime < hyp.stat().st_mtime:
                 findings.append(("ERROR", f"{p.relative_to(project)} is older than hypotheses.md"))
+    for name in ("hypotheses.md", "decisions.md", "verification.md"):
+        f = project / name
+        if f.exists():
+            bad = sum(1 for line in f.read_text().splitlines() if any(ord(ch) > 127 for ch in line))
+            if bad:
+                findings.append(("ERROR", f"{name}: {bad} lines with non-ASCII characters (em dashes, curly quotes)"))
     notebooks = sorted(project.glob("*analysis*.ipynb"))
     if not notebooks:
         findings.append(("ERROR", "no *analysis*.ipynb in the project folder"))

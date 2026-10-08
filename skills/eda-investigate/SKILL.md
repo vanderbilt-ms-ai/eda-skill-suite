@@ -33,9 +33,14 @@ analyst decides at each, and the rules that belong to no single stage.
 | 7. Write the synthesis, the limits, the memo, and the recap | `eda-write-prose` | the interpretation; the recommendation |
 | 8. Verify everything against the data | `eda-verify` | sign-off |
 
+Load each stage's skill with the Skill tool before writing that stage's first cell, even when
+the stage looks familiar. The rules that decide a verdict, a model, or a figure are in those
+files and nowhere else; a run that skipped `eda-test-hypothesis` and `eda-model` produced
+verdicts and classifiers that followed neither.
+
 Three skills apply to every cell at every stage: `eda-write-notebook` (how a notebook is built),
 `eda-draw-figure` (how a figure is drawn), and `eda-write-prose` (how text about data is written).
-Read them before the first cell. `eda-scripts` holds the scripts the stages run.
+Load all three before the first cell. `eda-scripts` holds the scripts the stages run.
 
 ## Handing decisions back
 

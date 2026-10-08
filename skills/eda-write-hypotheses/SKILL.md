@@ -56,6 +56,17 @@ afterwards. The first set holds:
 
 Two to four per question is usual. Seven means the analyst has written the answer in advance.
 
+The first set does not hold the analyst's own theories of mechanism. "The link is a genre
+artifact", "there is a ceiling effect past a point", and "the pattern is drift over the years"
+are explanations an analyst thinks of, not explanations the stakeholder gave, and each needs a
+look at the data to be worth testing. They belong to the second set, written after the first
+look, with the view that prompted them named. Keeping them out of the first set is what lets
+the reader tell what was believed before the data from what the data suggested.
+
+When the stakeholder's word names something the data cannot measure ("streams", when the
+available data holds a popularity score), say so in the hypothesis and in `decisions.md`, and
+test the closest measure under its own name.
+
 Write them to `hypotheses.md`, then run `check_order.py --stamp` (`eda-scripts`) before any data
 is downloaded. The analysis notebook's hypotheses cell is this file, inserted verbatim. A failed
 hypothesis from the first set stays failed; it is not re-tested with a different measure
@@ -69,7 +80,10 @@ written as a hypothesis in the form above, plus one line: what prompted it (the 
 or the finding, by section number).
 
 The first batch is written in the analysis notebook right after the data-quality section has been
-read, under its own heading, before any hypothesis is tested. Later ones open the section that
+read, under the heading "## Second hypotheses (from the data)", before any hypothesis is tested.
+The lint reports an analysis notebook that has the first set and not this heading. The batch
+holds at least two hypotheses, because the first look and about twenty quality checks always show
+more than one thing the request did not mention. Later ones open the section that
 tests them. They are numbered B1, B2, and so on, so the reader can tell which hypotheses were
 written before the data and which after.
 

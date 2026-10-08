@@ -17,7 +17,8 @@ What it can check automatically (everything else in the standards needs reading)
               (ERROR); reversals, framing sentences, wording that may claim more than the record,
               and markdown cells over 200 words (WARN)
   hypotheses - a "Hypothesis ...", "Digging deeper ...", or "Lens ..." section whose opening
-              markdown has no "Refuted if" (ERROR)
+              markdown has no "Refuted if" (ERROR); a notebook with "## First hypotheses" and no
+              "## Second hypotheses" section (ERROR)
   --trace   - numbers quoted in the markdown that no output shows:
               "What we found" cells     against the outputs above them (also inside a synthesis)
               other cells under a Synthesis, Memo, or Recap heading
@@ -261,7 +262,8 @@ def lint(path, trace=False):
             for match in BEYOND_RECORD.finditer(text):
                 report("WARN", i, "writing: wording may claim more than the record shows", match.group())
             words = sum(len(line.split()) for line in text.splitlines() if not line.lstrip().startswith("|"))
-            if words > WALL_OF_TEXT:
+            is_hypotheses_cell = bool(re.search(r"^##\s+(?:First |Second )?hypotheses", text, re.I | re.M))
+            if words > WALL_OF_TEXT and not is_hypotheses_cell:   # the hypotheses cell is inserted verbatim
                 report("WARN", i, f"writing: markdown cell of {words} words (over {WALL_OF_TEXT}); split or cut")
             if heading and section_kind(section):
                 pending_refutation = [section_kind(section), i]
@@ -296,6 +298,10 @@ def lint(path, trace=False):
         seen_outputs.add(output_text(cell))
         seen_outputs.add(code_numbers(text))  # thresholds set in code
     close_section()
+    all_headings = " ".join(src(c) for c in cells if c["cell_type"] == "markdown")
+    if re.search(r"^##\s+First hypotheses", all_headings, re.I | re.M) and \
+            not re.search(r"^##\s+Second hypotheses", all_headings, re.I | re.M):
+        report("ERROR", 0, "hypotheses: no '## Second hypotheses (from the data)' section after the data-quality checks")
     return findings
 
 
