@@ -2,7 +2,7 @@
 
 Section headings and the job of each section's markdown. Replace the bracketed parts. Every section
 that runs a check ends with a "**What we found.**" cell. The opening cell states what the notebook
-holds; it does not narrate what the notebook is about to do (`eda-writing-standards`, No framing
+holds; it does not narrate what the notebook is about to do (`eda-write-about-data`, No framing
 sentences).
 
 ```
@@ -27,7 +27,7 @@ unknown about how it was collected.]
 
 ---
 ## 2. Naming conventions
-[The convention in two or three sentences; see eda-notebook-standards, Naming.]
+[The convention in two or three sentences; see eda-write-the-notebook, Naming.]
 
 [code: the mapping(s)]
 
@@ -47,7 +47,7 @@ helper's table of pieces, rows, first and last date, status]
 
 ---
 ## 5. Data quality
-(eda-data-quality: one subsection per check or group of checks, each with markdown before, a table
+(eda-check-the-data: one subsection per check or group of checks, each with markdown before, a table
 or chart, and "What we found" after)
 
 ---

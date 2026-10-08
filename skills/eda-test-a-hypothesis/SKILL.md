@@ -1,5 +1,5 @@
 ---
-name: eda-analysis-selection
+name: eda-test-a-hypothesis
 description: Chooses the analysis and figure that test a hypothesis as worded, states the verdict, and writes the next hypothesis. Owns the verdict rules. Use whenever a claim or question needs testing against data.
 ---
 
@@ -8,7 +8,7 @@ description: Chooses the analysis and figure that test a hypothesis as worded, s
 A test answers the claim as it is worded; a test of a different measure answers a different
 question. This skill picks the analysis that answers the claim, states the verdict, and turns the
 next question into the next hypothesis. It owns the verdict rules; the hypothesis form is in
-`eda-notebook-setup`, Hypotheses.
+`eda-write-hypotheses`, Hypotheses.
 
 ## 1. Read the claim exactly
 
@@ -33,14 +33,14 @@ Write down, in the section's opening markdown:
 | Y rises or falls with X (two numeric) | scatter plus a regression line: slope in the data's units, r, R-squared; a log scale when X spans orders of magnitude | scatter with the line |
 | Y differs by category after accounting for X | multiple regression; compare R-squared with and without each block of variables | bars of R-squared by model; a table of coefficients |
 | events concentrate in time | the series at a finer grain (month, then day, then hour); resample irregular readings first | bars by day; a line by hour |
-| something lasted or accumulated | duration past a threshold; the longest unbroken run; a cumulative sum, with gaps handled as `eda-data-quality` says | cumulative line, every case drawn, the case highlighted |
+| something lasted or accumulated | duration past a threshold; the longest unbroken run; a cumulative sum, with gaps handled as `eda-check-the-data` says | cumulative line, every case drawn, the case highlighted |
 | a combination of conditions explains it | how many cases meet each condition alone, and how many meet all | scatter of the two conditions with threshold lines |
-| there are kinds of cases | clustering; hand to `eda-lens` | scatter colored by cluster |
-| we could have told in advance | a rule or classifier evaluated on every case, with the cases it misses; hand to `eda-lens` | scatter with thresholds; confusion matrix |
+| there are kinds of cases | clustering; hand to `eda-apply-a-lens` | scatter colored by cluster |
+| we could have told in advance | a rule or classifier evaluated on every case, with the cases it misses; hand to `eda-apply-a-lens` | scatter with thresholds; confusion matrix |
 | this pattern explains the event | the same analysis where the event did not happen (other years, other groups) | the same chart for the comparison case, adjacent |
 
 The figure rules (every observation shown for a numeric predictor, the highlight, matched pairs,
-titles and labels) are in `eda-figure-standards`.
+titles and labels) are in `eda-draw-a-figure`.
 
 ## 3. Run it, then state the verdict
 
@@ -61,7 +61,7 @@ titles and labels) are in `eda-figure-standards`.
 
 ## 4. The next hypothesis
 
-End the section with the next question, chosen from the moves in `eda-workflow` (Where the next
+End the section with the next question, chosen from the moves in `eda-investigate` (Where the next
 question comes from), and write it as a series B hypothesis with its refutation. Each
 digging-deeper step is its own section with its own chart, opened by the hypothesis it tests.
 

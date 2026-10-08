@@ -1,5 +1,5 @@
 ---
-name: eda-verify
+name: eda-verify-the-analysis
 description: Checks an analysis before anyone relies on it, by re-running the notebooks and confirming every number, word, hypothesis, and figure against the data with the suite's tools. Use before handing over any analysis.
 ---
 
@@ -16,7 +16,7 @@ analysis notebook. No errors, no stale outputs.
 
 ## 2. Lint and trace
 
-`python <eda-tools>/scripts/nb_lint.py NB.ipynb --trace` on both notebooks (`eda-tools` says
+`python <eda-run-a-script>/scripts/nb_lint.py NB.ipynb --trace` on both notebooks (`eda-run-a-script` says
 where the scripts are). Fix every ERROR. Read every WARN and decide it; the wording warnings
 ("fell as", "a record", "caused", a framing sentence, a cell over 200 words) are flags for a
 person, and the trace warnings each need the number found in an output or a figure, or the claim
@@ -24,7 +24,7 @@ removed.
 
 ## 3. Hypotheses came in the right order
 
-`python <eda-tools>/scripts/check_order.py <project folder>`: `hypotheses.md` predates every file
+`python <eda-run-a-script>/scripts/check_order.py <project folder>`: `hypotheses.md` predates every file
 in `data/raw/`, and the analysis notebook's series A cell matches it verbatim. Then read: every
 series B hypothesis names what prompted it, and the thing that prompted it appears earlier in the
 notebooks.
@@ -44,25 +44,25 @@ number downstream.
 
 ## 6. Verdicts
 
-Against `eda-analysis-selection` (The verdict): each hypothesis was tested with the measure its
+Against `eda-test-a-hypothesis` (The verdict): each hypothesis was tested with the measure its
 wording requires, against the size it said matters; each verdict follows from the numbers shown;
 no failed hypothesis was repaired with a different measure; every "something else" finding is
 supported by its own section's evidence.
 
 ## 7. Words
 
-Against `eda-writing-standards`: read the brief, every "What we found", the synthesis, the memo,
+Against `eda-write-about-data`: read the brief, every "What we found", the synthesis, the memo,
 and the recap in full. The lint flags some of the wording; the rest (a claim beyond what the record
 holds, a figurative phrase, a framing sentence, a fragment) is caught only by reading.
 
 ## 8. Gaps and windows
 
-Every measure that depends on continuity was handled as `eda-data-quality` (Gaps in a series)
+Every measure that depends on continuity was handled as `eda-check-the-data` (Gaps in a series)
 says, and the findings say how. Every rank names its window.
 
 ## 9. Look at every figure
 
-`python <eda-tools>/scripts/figures.py NB.ipynb <out folder>` writes every figure to a PNG. Open
+`python <eda-run-a-script>/scripts/figures.py NB.ipynb <out folder>` writes every figure to a PNG. Open
 each one: title, labels, ticks, highlight, nothing overlapping, the numbers drawn on it match the
 tables.
 
