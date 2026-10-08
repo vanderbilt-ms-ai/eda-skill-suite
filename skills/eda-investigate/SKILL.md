@@ -92,7 +92,7 @@ After each finding, list candidate next questions and choose one. The usual sour
 - What was the other variable doing at the same time? Draw both in the same form, side by side
   (`eda-draw-figure`, Matched pairs).
 - How long did it last? What accumulated?
-- Does the total hide subgroups that differ?
+- Do subgroups differ in ways the total does not show?
 - Does the same pattern appear where the event did not happen?
 - What do the model's residuals, clusters, or misclassified cases point at? (`eda-model`)
 

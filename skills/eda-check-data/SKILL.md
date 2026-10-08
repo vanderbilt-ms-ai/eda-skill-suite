@@ -19,8 +19,8 @@ values in the years compared" is a finding, and the reader needs the evidence. A
 cannot apply to this data gets one line, "**Does not apply:** [why]". Related checks that find
 nothing share one table. The whole section runs about 20 to 30 cells.
 
-This section examines one variable at a time and how the data was recorded. A comparison that
-tests a hypothesis belongs in the analysis notebook. What these views suggest is written down
+Each check examines one variable, or how the data was recorded. A comparison that tests a
+hypothesis belongs in the analysis notebook. What these views suggest is written down
 afterwards as the second set of hypotheses (`eda-write-hypotheses`).
 
 ## 1. What a row is

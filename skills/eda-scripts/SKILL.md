@@ -27,7 +27,7 @@ ERROR lines are breaches; WARN lines need a person's decision. The exit code is 
 Errors: a print statement that narrates a result, at the top level or inside a loop; a section
 that tests something with no "What we found" cell; a hypothesis, digging-deeper, or model section
 with no "Refuted if" before its first code cell; a notebook with first hypotheses and no "Second
-hypotheses" section; a cell not executed; a cell that raised; an
+hypotheses" section; a hypothesis over 80 words; a cell not executed; a cell that raised; an
 absolute path; a plotting cell with no title or axis label (a helper that sets them counts); a
 bar chart whose y-axis starts above zero; non-ASCII punctuation; a stock phrase or idiom; a
 column name in a finding.

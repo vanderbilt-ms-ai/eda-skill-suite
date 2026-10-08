@@ -18,7 +18,7 @@ What it can check automatically (everything else in the standards needs reading)
               and markdown cells over 200 words (WARN)
   hypotheses - a "Hypothesis ...", "Digging deeper ...", or "Lens ..." section whose opening
               markdown has no "Refuted if" (ERROR); a notebook with "## First hypotheses" and no
-              "## Second hypotheses" section (ERROR)
+              "## Second hypotheses" section (ERROR); a hypothesis over 80 words (ERROR)
   --trace   - numbers quoted in the markdown that no output shows:
               "What we found" cells     against the outputs above them (also inside a synthesis)
               other cells under a Synthesis, Memo, or Recap heading
@@ -57,6 +57,9 @@ REVERSAL = re.compile(r"(?i)\bnot\b[^.!?\n]{2,60}?\s-\s(?:but|until|yet|it'?s)\b
 BEYOND_RECORD = re.compile(r"(?i)\bfell as\b|\bset a record\b|\ba record\b(?! of)|\brecord-breaking\b|"
                            r"\bdid not happen\b|\bcaused?\b|\bbecause of\b|\bled to\b|\bdue to\b")
 WALL_OF_TEXT = 200   # words in one markdown cell, tables excluded
+HYPOTHESIS_WORDS = 80   # words in one hypothesis, claim and refutation included
+# Where one hypothesis starts: "**H1.", "**B2.", "**Hypothesis 3", "1. **", "### H1"
+HYPOTHESIS_START = re.compile(r"^(?:#{2,4}\s+)?(?:\d+\.\s+\*\*|(?:\d+\.\s+)?\**\s*(?:H|B|Hypothesis\s*)\d+[.:)])", re.M)
 BAR_CALL = re.compile(r"\.bar\(|\.barh\(|kind\s*=\s*[\"']barh?[\"']|\.plot\.barh?\(")
 NON_ASCII_PUNCT = {"\u2014": "em dash", "\u2013": "en dash", "\u2192": "arrow", "\u2190": "arrow",
                    "\u201c": "curly quote", "\u201d": "curly quote", "\u2018": "curly quote",
@@ -263,7 +266,16 @@ def lint(path, trace=False):
                 report("WARN", i, "writing: wording may claim more than the record shows", match.group())
             words = sum(len(line.split()) for line in text.splitlines() if not line.lstrip().startswith("|"))
             is_hypotheses_cell = bool(re.search(r"^##\s+(?:First |Second )?hypotheses", text, re.I | re.M))
-            if words > WALL_OF_TEXT and not is_hypotheses_cell:   # the hypotheses cell is inserted verbatim
+            if is_hypotheses_cell:   # the cell holds several hypotheses; each one is limited instead
+                starts = [m.start() for m in HYPOTHESIS_START.finditer(text)]
+                for a, b in zip(starts, starts[1:] + [len(text)]):
+                    chunk = text[a:b]
+                    chunk = re.split(r"\n(?:---|\*[^*\n]+\*\s*$|#{1,3}\s)", chunk)[0]   # stop at a rule, a note, a heading
+                    n = len(chunk.split())
+                    if n > HYPOTHESIS_WORDS:
+                        report("ERROR", i, f"hypotheses: one hypothesis of {n} words (limit {HYPOTHESIS_WORDS})",
+                               chunk.strip()[:60].replace("\n", " "))
+            if words > WALL_OF_TEXT and not is_hypotheses_cell:
                 report("WARN", i, f"writing: markdown cell of {words} words (over {WALL_OF_TEXT}); split or cut")
             if heading and section_kind(section):
                 pending_refutation = [section_kind(section), i]

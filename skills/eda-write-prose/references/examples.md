@@ -1,6 +1,6 @@
 # Sentences before and after
 
-From case-study drafts and test runs. Bracketed parts stand for a case's own numbers.
+From case-study drafts and test runs. Bracketed parts are placeholders for a case's own numbers.
 
 | Before | Problem | After |
 |---|---|---|

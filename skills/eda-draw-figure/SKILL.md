@@ -28,7 +28,7 @@ labels show only in the render.
 | many numeric variables at once | many numeric | correlation heatmap, pair plot, or principal components |
 
 - For a numeric predictor, draw every observation: a scatter of each case with its regression
-  line. Grouped bars may sit beside it, but on their own they hide the cases.
+  line. Grouped bars may sit beside it, but on their own they do not show the cases.
 - When one case (a year, a state) is compared with the others, draw them all and highlight the
   one being asked about.
 - Matched pairs: when two variables are in play and one is drawn in a given form, draw the other
@@ -65,7 +65,7 @@ labels show only in the render.
 - Choose by what the data is doing: qualitative for categories; sequential for low to high;
   diverging for above and below a midpoint; a highlight for one case against the rest.
 - Highlight: one strong color (firebrick, for example) for the case asked about, silver or grey
-  for the rest, and the figure says what the highlight means. The same color keeps the same
+  for the rest, and a label on the figure states what the highlight means. The same color keeps the same
   meaning throughout the notebook.
 - Colorblind-safe palettes for categories; never red against green as the only distinction.
 - Set colors where the plot is drawn, not as module-level constants (`eda-write-notebook`).

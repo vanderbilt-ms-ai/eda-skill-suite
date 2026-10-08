@@ -33,6 +33,9 @@ The brief is the first cell of the analysis notebook. It is written from the req
 
 - One claim, as a full sentence that could be false. A claim with several parts ("the month was
   cold and wet and windy") is split into one hypothesis per part.
+- At most 80 words in total, claim and refutation included. A longer hypothesis holds two claims
+  or an argument for the claim; the argument goes in the section that tests it. The lint reports
+  a longer one.
 - "Refuted if", followed by the result that would refute it. A claim with no such result is not a
   hypothesis and is dropped.
 - The smallest difference that would change the stakeholder's decision, not only the direction
@@ -60,8 +63,8 @@ The first set does not hold the analyst's own theories of mechanism. "The link i
 artifact", "there is a ceiling effect past a point", and "the pattern is drift over the years"
 are explanations an analyst thinks of, not explanations the stakeholder gave, and each needs a
 look at the data to be worth testing. They belong to the second set, written after the first
-look, with the view that prompted them named. Keeping them out of the first set is what lets
-the reader tell what was believed before the data from what the data suggested.
+look, with the view that prompted them named. The split shows the reader which beliefs came
+before the data and which the data suggested.
 
 When the stakeholder's word names something the data cannot measure ("streams", when the
 available data holds a popularity score), say so in the hypothesis and in `decisions.md`, and
@@ -82,8 +85,8 @@ or the finding, by section number).
 The first batch is written in the analysis notebook right after the data-quality section has been
 read, under the heading "## Second hypotheses (from the data)", before any hypothesis is tested.
 The lint reports an analysis notebook that has the first set and not this heading. The batch
-holds at least two hypotheses, because the first look and about twenty quality checks always show
-more than one thing the request did not mention. Later ones open the section that
+holds at least two hypotheses; the first look and the quality checks show more than one thing the
+request did not mention. Later ones open the section that
 tests them. They are numbered B1, B2, and so on, so the reader can tell which hypotheses were
 written before the data and which after.
 

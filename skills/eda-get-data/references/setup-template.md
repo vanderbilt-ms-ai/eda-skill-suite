@@ -14,7 +14,7 @@ internet connection.]
 
 Files written to `data/`:
 - `[file].csv`: one row per [unit]; [what the columns hold]
-- `PROVENANCE.md`: source, request, pull time
+- `PROVENANCE.md`: source, request, download time
 
 ---
 ## 1. Where the data comes from

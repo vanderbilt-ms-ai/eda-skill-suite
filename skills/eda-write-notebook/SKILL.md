@@ -86,7 +86,7 @@ that does more than the analysis needs.
 - A helper function only for a chart or a calculation repeated many times, taking its data as
   arguments. The download helper is `fetch.py` from `eda-scripts`, not a function written in the
   notebook, so that every project downloads the same careful way.
-- Colors are set where the plot is drawn. A module-level style constant hides a choice far from
+- Colors are set where the plot is drawn. A module-level style constant puts a choice far from
   where it matters.
 - A comment explains why, never what the line does; the markdown above already says what.
 - Randomness gets a fixed seed (`random_state=0`).

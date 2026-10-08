@@ -105,7 +105,7 @@ problem, which is why every figure has to be looked at.
 
 **Rules broken:**
 - **Color:** two of seven bars are firebrick, Online Panel and Live Phone, and nothing on the
-  figure says why. They are the two methods the hypothesis compares; a reader without the notebook
+  figure gives the reason. They are the two methods the hypothesis compares; a reader without the notebook
   would guess they are the best or the worst.
 - **Five-step description:** step 4, what each mark represents, cannot be completed: the reader
   does not know what red means.
