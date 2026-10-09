@@ -20,7 +20,12 @@ Cell rules are in `eda-write-notebook`; prose rules in `eda-write-prose`.
 
 - Name the publisher, the product, the entity each row describes and its identifier, and link the
   browse page and the API or file documentation.
-- Say why this source can test the hypotheses.
+- Say why this source can test the hypotheses, word by word. When a word of the request names
+  something the source does not hold ("streams", when the file holds a popularity score), look
+  for a source that holds it before proposing a substitute, and show the analyst what exists:
+  the source that has the word, the source that has a stand-in, and what each costs to get.
+  Substituting is the analyst's decision, made after seeing that, and it is recorded in
+  `decisions.md` and stated in the memo.
 - Describe how the data was generated: who collected it and why, what it is made of, how it was
   processed before publication, how it is distributed and maintained, and which of those is
   unknown.

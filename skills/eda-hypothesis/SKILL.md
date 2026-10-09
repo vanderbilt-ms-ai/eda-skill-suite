@@ -57,9 +57,11 @@ Ask these one at a time, and wait for each answer. Do not skip ahead to a draft.
 7. Does the data you have, or can get, measure that? If not, what is the closest measure, and
    what does the substitution cost?
 
-Then read back one hypothesis in the analyst's words, labelled "In your words:", with the word
-count, and ask them to confirm or change it. Do not add claims they did not make. If the answers
-contain two claims, say so and ask which one this hypothesis is.
+Then read back one hypothesis assembled from the analyst's own sentences, labelled "In your
+words:", with the word count, and ask them to confirm or change it. Use their phrasing; do not
+rewrite it into the analyst's voice as you imagine it, and do not add a claim, a measure, or a
+threshold they did not state. If the answers hold no claim yet, say so and ask for one. If they
+hold two claims, say so and ask which one this hypothesis is.
 
 ## Evaluating a hypothesis
 

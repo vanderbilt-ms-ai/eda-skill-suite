@@ -42,6 +42,21 @@ Three skills apply to every cell at every stage: `eda-write-notebook` (how a not
 `eda-draw-figure` (how a figure is drawn), and `eda-write-prose` (how text about data is written).
 Load all three before the first cell. `eda-scripts` holds the scripts the stages run.
 
+## Stage 1: the analyst's hypotheses
+
+Ask the analyst for their questions and their hypotheses, and wait. Do not propose hypotheses,
+defaults, or thresholds for them to approve; a hypothesis the analyst approved is not one they
+formed. Mention once that `eda-hypothesis` can help if they ask for it, and load it only when
+they do. The form a hypothesis has to meet is in `eda-hypothesis` (What a hypothesis contains);
+when one the analyst gives does not meet it, say which line it misses and ask again.
+
+A first set holds two to four hypotheses per question: the belief the stakeholder stated, the
+checks the stakeholder would expect, and one claim that something else explains it. One
+hypothesis per question tests the belief and nothing else, so the investigation has nowhere to
+go when the belief fails. Ask for the rest before any data is requested. The same applies to the
+second set at stage 4: ask the analyst what the first look and the quality checks raised, and
+wait for their hypotheses.
+
 ## Handing decisions back
 
 At every point a skill marks "the analyst decides":
